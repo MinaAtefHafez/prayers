@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:prayers/core/extensions/distance_extention.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
 import 'package:prayers/features/home/data/models/prayer_model.dart';
-
 class PrayerListViewItem extends StatefulWidget {
   const PrayerListViewItem({super.key, required this.index, required this.prayer});
 
@@ -22,10 +21,15 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
   void initState() {
     super.initState();
     _controller = AnimationController(
-        vsync: this, duration: Duration(milliseconds: widget.index * 500));
+        vsync: this, duration: Duration(seconds: widget.index * 1));
     _animation = Tween<Offset>(begin: const Offset(0, 5), end: Offset.zero)
         .animate(_controller);
     _controller.forward();
+  }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override

@@ -42,6 +42,7 @@ dependencies:
   get_it: ^7.7.0
   intl: ^0.18.0
   location: ^6.0.1
+  lottie: ^3.1.0
   permission_handler: ^11.3.1
   shared_preferences: ^2.2.3
   shimmer: ^3.0.0

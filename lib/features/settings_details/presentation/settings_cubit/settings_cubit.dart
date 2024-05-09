@@ -34,8 +34,7 @@ class SettingsCubit extends Cubit<SettingsState> {
           locationData.latitude!, locationData.longitude!);
       location = LocationModel.fromLocationData(locationData);
       location = location!.copyWith(locationName: placemarks[0].locality);
-      saveLocationDataLocal();
-
+      await saveLocationDataLocal();
       emit(GetCurrentLocationSuccess(location!.locationName!));
     } on LocationException catch (e) {
       emit(GetCurrentLocationFailure(e.errMessage));

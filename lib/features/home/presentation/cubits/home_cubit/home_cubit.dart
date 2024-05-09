@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prayers/features/home/data/models/calendar_month_model.dart';
@@ -10,9 +8,7 @@ import 'package:prayers/features/home/presentation/view/screens/dome_screen.dart
 import 'package:prayers/features/home/presentation/view/screens/hijri_screen.dart';
 import 'package:prayers/features/home/presentation/view/screens/prayers_screen.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
-
 import '../../../../../core/helpers/intl_helper/intl_helper.dart';
-
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -91,7 +87,6 @@ class HomeCubit extends Cubit<HomeState> {
       }
 
       final prayerNowAsString = prayers[index].prayerDate!.split(' ').first;
-      log(prayerNowAsString);
       final prayerNow = IntlHelper.dateTime(prayerNowAsString);
       final paryerNextAsString =
           prayers[index + 1].prayerDate!.split(' ').first;
@@ -106,8 +101,19 @@ class HomeCubit extends Cubit<HomeState> {
     return prayer;
   }
 
+  String get differenceBetweenTimeNowAndPreviousPrayer {
+    final timeNow = IntlHelper.dateTime();
+    final timePreviousPrayerAsString =
+        previousPrayer!.prayerDate!.split(' ').first;
+    final previousTime = IntlHelper.dateTime(timePreviousPrayerAsString);
+    final differene = timeNow.difference(previousTime);
+    return differene.inMinutes.toString();
+  }
+
   Future<void> getPreviousPrayerForToday() async {
     previousPrayer = await getPreviousPrayer();
+    previousPrayer = previousPrayer!
+        .copyWith(differnece: differenceBetweenTimeNowAndPreviousPrayer);
     emit(GetPreviousPrayer());
   }
 }

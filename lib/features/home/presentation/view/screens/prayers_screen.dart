@@ -9,6 +9,7 @@ import 'package:prayers/core/theme/app_styles/app_styles.dart';
 import 'package:prayers/core/widgets/custom_toast.dart';
 import 'package:prayers/core/widgets/error_widget.dart';
 import 'package:prayers/core/widgets/shimmer.dart';
+import 'package:prayers/core/widgets/snack_bar.dart';
 import 'package:prayers/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import 'package:prayers/features/home/presentation/view/widgets/prayers_list_view.dart';
 import 'package:prayers/features/home/presentation/view/widgets/today_item.dart';
@@ -43,6 +44,10 @@ class _PrayerScreenState extends State<PrayerScreen> {
           if (state is GetCurrentLocationSuccess) {
             context.pop();
             CustomToast.showToast(state.location!);
+          }
+
+          if (state is GetCurrentLocationFailure) {
+            showSnackBar(context, message: state.errMessage);
           }
         }, child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
@@ -98,17 +103,35 @@ class _PrayerScreenState extends State<PrayerScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              PrayerItem(
-                                  prayerModel: homeCubit.previousPrayer!),
-                              Expanded(
-                                  child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 50.w, vertical: 10.h),
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(40.r),
-                                    child: Assets.imagesSplash.image()),
-                              )),
-                              PrayerItem(prayerModel: homeCubit.previousPrayer!)
+                              if (homeCubit.previousPrayer != null) ...[
+                                Expanded(
+                                  child: PrayerItem(
+                                      prayerModel: homeCubit.previousPrayer!),
+                                ),
+                              ] else ...[
+                                const Expanded(child: SizedBox())
+                              ],
+                              Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 30.w, vertical: 10.h),
+                                  child: SizedBox(
+                                    width: 140.w ,
+                                    height: 140.h ,
+                                    child: CircleAvatar(
+                                      radius: 70.r ,
+                                      backgroundImage:
+                                          Assets.imagesPrayer.imageProv(),
+                                    ),
+                                  )),
+                              if (homeCubit.previousPrayer != null) ...[
+                                Expanded(
+                                  child: PrayerItem(
+                                      isPrayerNext: true,
+                                      prayerModel: homeCubit.previousPrayer!),
+                                ),
+                              ] else ...[
+                                const Expanded(child: SizedBox())
+                              ],
                             ],
                           ),
                         ),

@@ -8,6 +8,7 @@ import 'package:prayers/features/home/presentation/view/screens/dome_screen.dart
 import 'package:prayers/features/home/presentation/view/screens/hijri_screen.dart';
 import 'package:prayers/features/home/presentation/view/screens/prayers_screen.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
+import '../../../../../core/enum/enum.dart';
 import '../../../../../core/helpers/intl_helper/intl_helper.dart';
 part 'home_state.dart';
 
@@ -71,16 +72,15 @@ class HomeCubit extends Cubit<HomeState> {
     emit(GetPrayerToday());
   }
 
-  Future<PrayerModel> getPreviousPrayer() async {
-    final List<PrayerModel> prayers = prayerToday!.timings!.prayers;
+  Future<PrayerModel?> getPreviousPrayer(List<PrayerModel> prayers) async {
     final dateTimeNow = IntlHelper.dateTime();
-    PrayerModel prayer = PrayerModel();
+    PrayerModel? prayer;
     for (int index = 0; index < prayers.length; index++) {
       if (index == prayers.length - 1) {
         final prayerNowAsString = prayers[index].prayerDate!.split(' ').first;
         final prayerNow = IntlHelper.dateTime(prayerNowAsString);
         final difference = dateTimeNow.difference(prayerNow).inMinutes;
-        if (difference > 0 && difference < 30) {
+        if (difference > 0 && difference <= 30) {
           prayer = prayers[index];
           break;
         }
@@ -101,6 +101,20 @@ class HomeCubit extends Cubit<HomeState> {
     return prayer;
   }
 
+  Future<PrayerModel?> getNextPrayer(List<PrayerModel> prayers) async {
+    final dateTimeNow = IntlHelper.dateTime();
+    PrayerModel? prayer;
+    for (int index = 0; index < prayers.length; index++) {
+      final prayerNextAsString = prayers[index].prayerDate!.split(' ').first;
+      final prayerNext = IntlHelper.dateTime(prayerNextAsString);
+      if (prayerNext.isAfter(dateTimeNow)) {
+        prayer = prayers[index];
+        break;
+      }
+    }
+    return prayer;
+  }
+
   String get differenceBetweenTimeNowAndPreviousPrayer {
     final timeNow = IntlHelper.dateTime();
     final timePreviousPrayerAsString =
@@ -110,10 +124,52 @@ class HomeCubit extends Cubit<HomeState> {
     return differene.inMinutes.toString();
   }
 
+  String get differenceBetweenNextPrayerAndTimeNow {
+    final timeNow = IntlHelper.dateTime();
+    final timeNextPrayerAsString = nextPrayer!.prayerDate!.split(' ').first;
+    final nextTime = IntlHelper.dateTime(timeNextPrayerAsString);
+    final differene = nextTime.difference(timeNow);
+    return differene.inMinutes.toString();
+  }
+
   Future<void> getPreviousPrayerForToday() async {
-    previousPrayer = await getPreviousPrayer();
+    previousPrayer = await getPreviousPrayer(prayerToday!.timings!.prayers);
     previousPrayer = previousPrayer!
         .copyWith(differnece: differenceBetweenTimeNowAndPreviousPrayer);
-    emit(GetPreviousPrayer());
+    emit(GetPrayer());
+  }
+
+  Future<void> getNextPrayerForToday() async {
+    nextPrayer = await getNextPrayer(prayerToday!.timings!.prayers);
+    nextPrayer =
+        nextPrayer!.copyWith(differnece: differenceBetweenNextPrayerAndTimeNow);
+    emit(GetPrayer());
+  }
+
+  PrayerState getPrayerState(PrayerModel prayer) {
+    if (previousPrayer!.prayerName == prayer.prayerName) {
+      return PrayerState.previous;
+    } else if (nextPrayer!.prayerName == prayer.prayerName) {
+      return PrayerState.next;
+    } else {
+      return PrayerState.normal;
+    }
+  }
+
+  bool get isPraviousPrayerNow {
+    final dateTimeNow = IntlHelper.dateTime();
+    final previousPrayerDateAsString =
+        previousPrayer!.prayerDate!.split(' ').first;
+    final prayerDateTime = IntlHelper.dateTime(previousPrayerDateAsString);
+    final difference = dateTimeNow.difference(prayerDateTime).inMinutes;
+    if (difference > 0 && difference <= 60) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool get isNextPrayerNow {
+    return isPraviousPrayerNow ? false : true;
   }
 }

@@ -23,4 +23,4 @@ final class GetCalendarMonthLocalSuccess extends HomeState {}
 
 final class GetPrayerToday extends HomeState {}
 
-final class GetPreviousPrayer extends HomeState {}
+final class GetPrayer extends HomeState {}

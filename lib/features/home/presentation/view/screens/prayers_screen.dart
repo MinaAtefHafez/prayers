@@ -8,7 +8,6 @@ import 'package:prayers/core/gen/app_images.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
 import 'package:prayers/core/widgets/custom_toast.dart';
 import 'package:prayers/core/widgets/error_widget.dart';
-import 'package:prayers/core/widgets/shimmer.dart';
 import 'package:prayers/core/widgets/snack_bar.dart';
 import 'package:prayers/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import 'package:prayers/features/home/presentation/view/widgets/prayers_list_view.dart';
@@ -51,7 +50,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
           }
         }, child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            if (homeCubit.previousPrayer != null) {
+            if (homeCubit.prayerToday != null) {
               return Stack(
                 children: [
                   Container(color: AppColors.primary),
@@ -63,25 +62,16 @@ class _PrayerScreenState extends State<PrayerScreen> {
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: Row(
                             children: [
-                              BlocBuilder<SettingsCubit, SettingsState>(
-                                  builder: (context, state) {
-                                if (settingsCubit.location != null) {
-                                  return Row(
-                                    children: [
-                                      Text(
-                                          settingsCubit.location!.locationName!,
-                                          style: AppStyles.style20.copyWith(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600)),
-                                      const Icon(Icons.arrow_drop_down,
-                                          color: Colors.white),
-                                    ],
-                                  );
-                                } else {
-                                  return ShimmerWidget.rectangular(
-                                      width: 150.w, height: 35.h);
-                                }
-                              }),
+                              Row(
+                                children: [
+                                  Text(settingsCubit.location!.locationName!,
+                                      style: AppStyles.style20.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600)),
+                                  const Icon(Icons.arrow_drop_down,
+                                      color: Colors.white),
+                                ],
+                              ),
                               const Spacer(),
                               IconButton(
                                   onPressed: () {
@@ -106,6 +96,8 @@ class _PrayerScreenState extends State<PrayerScreen> {
                               if (homeCubit.previousPrayer != null) ...[
                                 Expanded(
                                   child: PrayerItem(
+                                      isPrayerNow:
+                                          homeCubit.isPraviousPrayerNow,
                                       prayerModel: homeCubit.previousPrayer!),
                                 ),
                               ] else ...[
@@ -115,19 +107,20 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 30.w, vertical: 10.h),
                                   child: SizedBox(
-                                    width: 140.w ,
-                                    height: 140.h ,
+                                    width: 140.w,
+                                    height: 140.h,
                                     child: CircleAvatar(
-                                      radius: 70.r ,
+                                      radius: 70.r,
                                       backgroundImage:
                                           Assets.imagesPrayer.imageProv(),
                                     ),
                                   )),
-                              if (homeCubit.previousPrayer != null) ...[
+                              if (homeCubit.nextPrayer != null) ...[
                                 Expanded(
                                   child: PrayerItem(
+                                      isPrayerNow: homeCubit.isNextPrayerNow,
                                       isPrayerNext: true,
-                                      prayerModel: homeCubit.previousPrayer!),
+                                      prayerModel: homeCubit.nextPrayer!),
                                 ),
                               ] else ...[
                                 const Expanded(child: SizedBox())
@@ -162,6 +155,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 30.w),
                                   child: PrayersListView(
+                                      prayerState: homeCubit.getPrayerState,
                                       prayers: homeCubit
                                           .prayerToday!.timings!.prayers),
                                 )),

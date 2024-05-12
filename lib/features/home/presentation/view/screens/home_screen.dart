@@ -34,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     timer = Timer.periodic(const Duration(minutes: 1), (timer) async {
       await homeCubit.getPrayersToday();
       await homeCubit.getPreviousPrayerForToday();
+      await homeCubit.getNextPrayerForToday();
     });
   }
 

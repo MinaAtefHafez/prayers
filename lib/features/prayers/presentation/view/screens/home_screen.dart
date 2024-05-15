@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
-import 'package:prayers/features/home/presentation/cubits/home_cubit/home_cubit.dart';
+import 'package:prayers/features/prayers/presentation/cubits/home_cubit/prayers_cubit.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
 import '../../../../../core/dependency_injection/dependency_injection.dart';
 
@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final settingsCubit = di<SettingsCubit>();
-  final homeCubit = di<HomeCubit>();
+  final prayersCubit = di<PrayersCubit>();
   late Timer timer;
   @override
   void initState() {
@@ -31,11 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
       settingsCubit.getMothodLocal(),
       settingsCubit.getLocationLocal(),
     ]);
-    await homeCubit.getCalendarMonth();
+    await prayersCubit.getCalendarMonth();
     timer = Timer.periodic(const Duration(seconds: 30), (timer) async {
-      await homeCubit.getPrayers();
-      await homeCubit.getPreviousPrayerForToday();
-      await homeCubit.getNextPrayerForToday();
+      await prayersCubit.getPrayers();
+      await prayersCubit.getPreviousPrayerForToday();
+      await prayersCubit.getNextPrayerForToday();
     });
   }
 
@@ -47,10 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
-        bloc: homeCubit,
+    return BlocBuilder<PrayersCubit, PrayersState>(
+        bloc: prayersCubit,
         builder: (context, state) => Scaffold(
-              body: homeCubit.screens[homeCubit.bottomNavIndex],
+              body: prayersCubit.screens[prayersCubit.bottomNavIndex],
               bottomNavigationBar: BottomNavigationBar(
                   backgroundColor: Colors.white,
                   selectedItemColor: Colors.black,
@@ -60,8 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.black, applyTextScaling: true, size: 27),
                   selectedLabelStyle: AppStyles.style16.copyWith(
                       fontWeight: FontWeight.w500, color: Colors.black),
-                  currentIndex: homeCubit.bottomNavIndex,
-                  onTap: homeCubit.changeBottomNavIndex,
+                  currentIndex: prayersCubit.bottomNavIndex,
+                  onTap: prayersCubit.changeBottomNavIndex,
                   items: [
                     BottomNavigationBarItem(
                         icon: const Icon(Icons.alarm), label: tr('Prayers')),

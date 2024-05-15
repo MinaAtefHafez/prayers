@@ -10,9 +10,9 @@ import 'package:prayers/core/widgets/custom_date_picker.dart';
 import 'package:prayers/core/widgets/custom_toast.dart';
 import 'package:prayers/core/widgets/error_widget.dart';
 import 'package:prayers/core/widgets/snack_bar.dart';
-import 'package:prayers/features/home/presentation/cubits/home_cubit/home_cubit.dart';
-import 'package:prayers/features/home/presentation/view/widgets/prayers_list_view.dart';
-import 'package:prayers/features/home/presentation/view/widgets/today_item.dart';
+import 'package:prayers/features/prayers/presentation/cubits/home_cubit/prayers_cubit.dart';
+import 'package:prayers/features/prayers/presentation/view/widgets/prayers_list_view.dart';
+import 'package:prayers/features/prayers/presentation/view/widgets/today_item.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/getting_location_dialog.dart';
 import '../../../../../core/theme/colors/colors.dart';
@@ -26,13 +26,13 @@ class PrayerScreen extends StatefulWidget {
 }
 
 class _PrayerScreenState extends State<PrayerScreen> {
-  final homeCubit = di<HomeCubit>();
+  final prayersCubit = di<PrayersCubit>();
   final settingsCubit = di<SettingsCubit>();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: homeCubit,
+      value: prayersCubit,
       child: BlocProvider.value(
         value: settingsCubit,
         child: BlocListener<SettingsCubit, SettingsState>(
@@ -49,9 +49,9 @@ class _PrayerScreenState extends State<PrayerScreen> {
           if (state is GetCurrentLocationFailure) {
             showSnackBar(context, message: state.errMessage);
           }
-        }, child: BlocBuilder<HomeCubit, HomeState>(
+        }, child: BlocBuilder<PrayersCubit, PrayersState>(
           builder: (context, state) {
-            if (homeCubit.prayerToday != null) {
+            if (prayersCubit.prayerToday != null) {
               return Stack(
                 children: [
                   Container(color: AppColors.primary),
@@ -94,12 +94,12 @@ class _PrayerScreenState extends State<PrayerScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              if (homeCubit.previousPrayer != null) ...[
+                              if (prayersCubit.previousPrayer != null) ...[
                                 Expanded(
                                   child: PrayerItem(
                                       isPrayerNow:
-                                          homeCubit.isPraviousPrayerNow,
-                                      prayerModel: homeCubit.previousPrayer!),
+                                          prayersCubit.isPraviousPrayerNow,
+                                      prayerModel: prayersCubit.previousPrayer!),
                                 ),
                               ] else ...[
                                 const Expanded(child: SizedBox())
@@ -116,13 +116,13 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                           Assets.imagesPrayer.imageProv(),
                                     ),
                                   )),
-                              if (homeCubit.nextPrayer != null) ...[
+                              if (prayersCubit.nextPrayer != null) ...[
                                 Expanded(
                                   child: PrayerItem(
                                       isPrayerNow:
-                                          !homeCubit.isPraviousPrayerNow,
+                                          !prayersCubit.isPraviousPrayerNow,
                                       isPrayerNext: true,
-                                      prayerModel: homeCubit.nextPrayer!),
+                                      prayerModel: prayersCubit.nextPrayer!),
                                 ),
                               ] else ...[
                                 const Expanded(child: SizedBox())
@@ -143,7 +143,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   padding: EdgeInsets.symmetric(
                                       vertical: 15.h, horizontal: 30.w),
                                   child: TodayItem(
-                                      prayerToday: homeCubit.prayerToday!.date!,
+                                      prayerToday: prayersCubit.prayerToday!.date!,
                                       onTapToday: callDatePicker,
                                       onTapIcon: () {}),
                                 ),
@@ -158,9 +158,9 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                       EdgeInsets.symmetric(horizontal: 30.w),
                                   child: PrayersListView(
                                       isPrayersForToday:
-                                          homeCubit.isPrayersForToday,
-                                      prayerState: homeCubit.getPrayerState,
-                                      prayers: homeCubit
+                                          prayersCubit.isPrayersForToday,
+                                      prayerState: prayersCubit.getPrayerState,
+                                      prayers: prayersCubit
                                           .prayerToday!.timings!.prayers),
                                 )),
                               ],
@@ -190,7 +190,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
   void callDatePicker() async {
     final datePick = await CustomDatePicker.datePicker(context);
     if (datePick != null) {
-      await homeCubit.getPrayers(datePick.day.toString());
+      await prayersCubit.getPrayers(datePick.day.toString());
     }
   }
 }

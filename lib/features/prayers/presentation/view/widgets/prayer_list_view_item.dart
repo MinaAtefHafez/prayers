@@ -5,7 +5,7 @@ import 'package:prayers/core/enum/enum.dart';
 import 'package:prayers/core/extensions/distance_extention.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
 import 'package:prayers/core/theme/colors/colors.dart';
-import 'package:prayers/features/home/data/models/prayer_model.dart';
+import 'package:prayers/features/prayers/data/models/prayer_model.dart';
 
 class PrayerListViewItem extends StatefulWidget {
   const PrayerListViewItem({
@@ -78,7 +78,7 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
                         ? widget.prayerState == PrayerState.previous
                             ? BoxDecoration(
                                 borderRadius: BorderRadius.circular(40.r),
-                                color: AppColors.primary.withOpacity(0.3))
+                                color: AppColors.primary.withOpacity(0.2))
                             : null
                         : null,
                     child: Text(tr(widget.prayer.prayerName!),

@@ -7,7 +7,7 @@ import 'package:prayers/core/helpers/api_helper/end_points.dart';
 import 'package:prayers/core/helpers/intl_helper/intl_helper.dart';
 import 'package:prayers/core/helpers/shared_preference/local_storage_keys.dart';
 import 'package:prayers/core/helpers/shared_preference/shared_preference.dart';
-import 'package:prayers/features/home/data/models/calendar_month_model.dart';
+import 'package:prayers/features/prayers/data/models/calendar_month_model.dart';
 
 abstract class HomeRepo {
   Future<Either<Failure, (CalendarMonthModel, Map<String, dynamic>)>>

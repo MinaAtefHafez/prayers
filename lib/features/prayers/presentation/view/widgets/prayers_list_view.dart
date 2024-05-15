@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prayers/core/enum/enum.dart';
-import 'package:prayers/features/home/data/models/prayer_model.dart';
-import 'package:prayers/features/home/presentation/view/widgets/prayer_list_view_item.dart';
+import 'package:prayers/features/prayers/data/models/prayer_model.dart';
+import 'package:prayers/features/prayers/presentation/view/widgets/prayer_list_view_item.dart';
 
 class PrayersListView extends StatelessWidget {
   const PrayersListView(

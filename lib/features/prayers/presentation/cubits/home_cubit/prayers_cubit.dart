@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prayers/features/home/data/models/calendar_month_model.dart';
-import 'package:prayers/features/home/data/models/calendar_month_model_param.dart';
-import 'package:prayers/features/home/data/models/prayer_model.dart';
-import 'package:prayers/features/home/data/repository/home_repo.dart';
-import 'package:prayers/features/home/presentation/view/screens/dome_screen.dart';
-import 'package:prayers/features/home/presentation/view/screens/hijri_screen.dart';
-import 'package:prayers/features/home/presentation/view/screens/prayers_screen.dart';
+import 'package:prayers/features/prayers/data/models/calendar_month_model.dart';
+import 'package:prayers/features/prayers/data/models/calendar_month_model_param.dart';
+import 'package:prayers/features/prayers/data/models/prayer_model.dart';
+import 'package:prayers/features/prayers/data/repository/home_repo.dart';
+import 'package:prayers/features/prayers/presentation/view/screens/dome_screen.dart';
+import 'package:prayers/features/prayers/presentation/view/screens/hijri_screen.dart';
+import 'package:prayers/features/prayers/presentation/view/screens/prayers_screen.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
 import '../../../../../core/enum/enum.dart';
 import '../../../../../core/helpers/intl_helper/intl_helper.dart';
-part 'home_state.dart';
+part 'prayers_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this._homeRepo, this._settingsCubit) : super(HomeInitial());
+class PrayersCubit extends Cubit<PrayersState> {
+  PrayersCubit(this._homeRepo, this._settingsCubit) : 
+  super(PrayersInitial());
 
   final HomeRepo _homeRepo;
   final SettingsCubit _settingsCubit;

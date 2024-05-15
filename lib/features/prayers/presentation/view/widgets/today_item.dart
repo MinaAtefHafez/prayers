@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:prayers/core/helpers/localization_helper/localization/localization_utils.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
-import 'package:prayers/features/home/data/models/calendar_month_model.dart';
+import 'package:prayers/features/prayers/data/models/calendar_month_model.dart';
 
 class TodayItem extends StatelessWidget {
   const TodayItem({

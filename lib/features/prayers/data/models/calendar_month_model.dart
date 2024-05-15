@@ -1,4 +1,4 @@
-import 'package:prayers/features/home/data/models/prayer_model.dart';
+import 'package:prayers/features/prayers/data/models/prayer_model.dart';
 
 class CalendarMonthModel {
   CalendarMonthModel({

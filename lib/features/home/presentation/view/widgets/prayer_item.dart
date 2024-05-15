@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prayers/core/extensions/distance_extention.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
+import 'package:prayers/core/theme/colors/colors.dart';
 import 'package:prayers/features/home/data/models/prayer_model.dart';
 
 class PrayerItem extends StatefulWidget {
@@ -47,14 +49,18 @@ class _PrayerItemState extends State<PrayerItem> with TickerProviderStateMixin {
         if (widget.isPrayerNow) ...[
           FadeTransition(
             opacity: _animation,
+            child: FittedBox(
+              child: Text(tr(widget.prayerModel.prayerName!),
+                  style: AppStyles.style25.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ] else ...[
+          FittedBox(
             child: Text(tr(widget.prayerModel.prayerName!),
                 style: AppStyles.style25.copyWith(
                     color: Colors.white, fontWeight: FontWeight.bold)),
           ),
-        ] else ...[
-          Text(tr(widget.prayerModel.prayerName!),
-              style: AppStyles.style25
-                  .copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
         ],
         Text(widget.prayerModel.prayerDate!.split(' ').first,
             style: AppStyles.style30
@@ -65,8 +71,9 @@ class _PrayerItemState extends State<PrayerItem> with TickerProviderStateMixin {
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
-                border: Border.all(color: Colors.grey.shade400, width: 2)),
+              borderRadius: BorderRadius.circular(20.r),
+              color: Colors.white.withOpacity(0.3) 
+            ),
             child: Visibility(
               visible: widget.isPrayerNext,
               replacement: Text(

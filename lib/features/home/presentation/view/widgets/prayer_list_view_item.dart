@@ -82,11 +82,11 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
                   const Spacer(),
                   Text(widget.prayer.prayerDate!.split(' ').first,
                       style: AppStyles.style18.copyWith(
-                          fontWeight: widget.prayerState ==
-                                        PrayerState.next ||
-                                    widget.prayerState == PrayerState.previous
-                                ? FontWeight.bold
-                                : FontWeight.w400, color: Colors.black)),
+                          fontWeight: widget.prayerState == PrayerState.next ||
+                                  widget.prayerState == PrayerState.previous
+                              ? FontWeight.bold
+                              : FontWeight.w400,
+                          color: Colors.black)),
                 ],
               ),
             ),

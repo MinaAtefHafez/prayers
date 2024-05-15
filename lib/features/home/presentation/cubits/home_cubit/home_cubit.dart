@@ -80,22 +80,24 @@ class HomeCubit extends Cubit<HomeState> {
         final prayerNowAsString = prayers[index].prayerDate!.split(' ').first;
         final prayerNow = IntlHelper.dateTime(prayerNowAsString);
         final difference = dateTimeNow.difference(prayerNow).inMinutes;
-        if (difference > 0 && difference <= 30) {
+        if (difference > 0 && difference <= 60) {
           prayer = prayers[index];
           break;
         }
       }
 
-      final prayerNowAsString = prayers[index].prayerDate!.split(' ').first;
-      final prayerNow = IntlHelper.dateTime(prayerNowAsString);
-      final paryerNextAsString =
-          prayers[index + 1].prayerDate!.split(' ').first;
-      final prayerNext = IntlHelper.dateTime(paryerNextAsString);
-      final bool isPrayerNowBeforeDateTime = prayerNow.isBefore(dateTimeNow);
-      final bool isPrayerNextAfterDateTime = prayerNext.isAfter(dateTimeNow);
-      if (isPrayerNowBeforeDateTime && isPrayerNextAfterDateTime) {
-        prayer = prayers[index];
-        break;
+      if (index < prayers.length - 1) {
+        final prayerNowAsString = prayers[index].prayerDate!.split(' ').first;
+        final prayerNow = IntlHelper.dateTime(prayerNowAsString);
+        final paryerNextAsString =
+            prayers[index + 1].prayerDate!.split(' ').first;
+        final prayerNext = IntlHelper.dateTime(paryerNextAsString);
+        final bool isPrayerNowBeforeDateTime = prayerNow.isBefore(dateTimeNow);
+        final bool isPrayerNextAfterDateTime = prayerNext.isAfter(dateTimeNow);
+        if (isPrayerNowBeforeDateTime && isPrayerNextAfterDateTime) {
+          prayer = prayers[index];
+          break;
+        }
       }
     }
     return prayer;
@@ -118,7 +120,7 @@ class HomeCubit extends Cubit<HomeState> {
   String get differenceBetweenTimeNowAndPreviousPrayer {
     final timeNow = IntlHelper.dateTime();
     final timePreviousPrayerAsString =
-        previousPrayer!.prayerDate!.split(' ').first;
+        previousPrayer?.prayerDate?.split(' ').first;
     final previousTime = IntlHelper.dateTime(timePreviousPrayerAsString);
     final differene = timeNow.difference(previousTime);
     return differene.inMinutes.toString();
@@ -126,7 +128,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   String get differenceBetweenNextPrayerAndTimeNow {
     final timeNow = IntlHelper.dateTime();
-    final timeNextPrayerAsString = nextPrayer!.prayerDate!.split(' ').first;
+    final timeNextPrayerAsString = nextPrayer?.prayerDate?.split(' ').first;
     final nextTime = IntlHelper.dateTime(timeNextPrayerAsString);
     final differene = nextTime.difference(timeNow);
     return differene.inMinutes.toString();
@@ -134,22 +136,22 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> getPreviousPrayerForToday() async {
     previousPrayer = await getPreviousPrayer(prayerToday!.timings!.prayers);
-    previousPrayer = previousPrayer!
-        .copyWith(differnece: differenceBetweenTimeNowAndPreviousPrayer);
+    previousPrayer = previousPrayer?.copyWith(
+        differnece: differenceBetweenTimeNowAndPreviousPrayer);
     emit(GetPrayer());
   }
 
   Future<void> getNextPrayerForToday() async {
     nextPrayer = await getNextPrayer(prayerToday!.timings!.prayers);
     nextPrayer =
-        nextPrayer!.copyWith(differnece: differenceBetweenNextPrayerAndTimeNow);
+        nextPrayer?.copyWith(differnece: differenceBetweenNextPrayerAndTimeNow);
     emit(GetPrayer());
   }
 
   PrayerState getPrayerState(PrayerModel prayer) {
-    if (previousPrayer!.prayerName == prayer.prayerName) {
+    if (previousPrayer?.prayerName == prayer.prayerName) {
       return PrayerState.previous;
-    } else if (nextPrayer!.prayerName == prayer.prayerName) {
+    } else if (nextPrayer?.prayerName == prayer.prayerName) {
       return PrayerState.next;
     } else {
       return PrayerState.normal;
@@ -157,9 +159,10 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   bool get isPraviousPrayerNow {
+    if (previousPrayer == null) return true;
     final dateTimeNow = IntlHelper.dateTime();
     final previousPrayerDateAsString =
-        previousPrayer!.prayerDate!.split(' ').first;
+        previousPrayer?.prayerDate!.split(' ').first;
     final prayerDateTime = IntlHelper.dateTime(previousPrayerDateAsString);
     final difference = dateTimeNow.difference(prayerDateTime).inMinutes;
     if (difference > 0 && difference <= 60) {

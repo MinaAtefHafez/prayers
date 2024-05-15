@@ -28,8 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void call() async {
-    await settingsCubit.getMothodLocal();
-    await settingsCubit.getLocationLocal();
+    await Future.wait([
+      settingsCubit.getMothodLocal(),
+      settingsCubit.getLocationLocal(),
+    ]);
     await homeCubit.getCalendarMonth();
     timer = Timer.periodic(const Duration(minutes: 1), (timer) async {
       await homeCubit.getPrayersToday();

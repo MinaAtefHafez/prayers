@@ -7,7 +7,7 @@ abstract class CustomDialog {
     showDialog(
       context: context,
       builder: (context) => Dialog(
-        backgroundColor: Colors.lime,
+        backgroundColor: Colors.white,
         shape: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.r),
             borderSide: BorderSide.none),

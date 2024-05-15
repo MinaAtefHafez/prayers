@@ -6,6 +6,7 @@ import 'package:prayers/core/extensions/assets_images.dart';
 import 'package:prayers/core/extensions/navigator_extension.dart';
 import 'package:prayers/core/gen/app_images.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
+import 'package:prayers/core/widgets/custom_date_picker.dart';
 import 'package:prayers/core/widgets/custom_toast.dart';
 import 'package:prayers/core/widgets/error_widget.dart';
 import 'package:prayers/core/widgets/snack_bar.dart';
@@ -118,7 +119,8 @@ class _PrayerScreenState extends State<PrayerScreen> {
                               if (homeCubit.nextPrayer != null) ...[
                                 Expanded(
                                   child: PrayerItem(
-                                      isPrayerNow: homeCubit.isNextPrayerNow,
+                                      isPrayerNow:
+                                          !homeCubit.isPraviousPrayerNow,
                                       isPrayerNext: true,
                                       prayerModel: homeCubit.nextPrayer!),
                                 ),
@@ -142,7 +144,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                       vertical: 15.h, horizontal: 30.w),
                                   child: TodayItem(
                                       prayerToday: homeCubit.prayerToday!.date!,
-                                      onTapToday: () {},
+                                      onTapToday: callDatePicker,
                                       onTapIcon: () {}),
                                 ),
                                 Divider(
@@ -155,6 +157,8 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 30.w),
                                   child: PrayersListView(
+                                      isPrayersForToday:
+                                          homeCubit.isPrayersForToday,
                                       prayerState: homeCubit.getPrayerState,
                                       prayers: homeCubit
                                           .prayerToday!.timings!.prayers),
@@ -181,5 +185,12 @@ class _PrayerScreenState extends State<PrayerScreen> {
         )),
       ),
     );
+  }
+
+  void callDatePicker() async {
+    final datePick = await CustomDatePicker.datePicker(context);
+    if (datePick != null) {
+      await homeCubit.getPrayers(datePick.day.toString());
+    }
   }
 }

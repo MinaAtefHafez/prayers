@@ -64,11 +64,11 @@ class HomeCubit extends Cubit<HomeState> {
     emit(GetCalendarMonthLocalSuccess());
   }
 
-  Future<void> getPrayersToday() async {
-    final String day = IntlHelper.dayNow;
+  Future<void> getPrayers([String? searchDay]) async {
+    final String day = searchDay ?? IntlHelper.dayNow;
     final String dayRefactor = day.length == 1 ? '0$day' : day;
-    prayerToday = calendarMonthModel!.data.singleWhere(
-        (element) => element.date!.gregorian!.day.toString() == dayRefactor);
+    prayerToday = calendarMonthModel!.data
+        .singleWhere((element) => element.date!.gregorian!.day == dayRefactor);
     emit(GetPrayerToday());
   }
 
@@ -162,7 +162,7 @@ class HomeCubit extends Cubit<HomeState> {
     if (previousPrayer == null) return true;
     final dateTimeNow = IntlHelper.dateTime();
     final previousPrayerDateAsString =
-        previousPrayer?.prayerDate!.split(' ').first;
+        previousPrayer?.prayerDate?.split(' ').first;
     final prayerDateTime = IntlHelper.dateTime(previousPrayerDateAsString);
     final difference = dateTimeNow.difference(prayerDateTime).inMinutes;
     if (difference > 0 && difference <= 60) {
@@ -172,7 +172,10 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  bool get isNextPrayerNow {
-    return isPraviousPrayerNow ? false : true;
+  bool get isPrayersForToday {
+    final day = IntlHelper.dayNow;
+    final dayRefactor = day.length == 1 ? '0$day' : day;
+    final prayer = prayerToday?.date?.gregorian?.day;
+    return prayer == dayRefactor;
   }
 }

@@ -83,7 +83,11 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
                         : null,
                     child: Text(tr(widget.prayer.prayerName!),
                         style: AppStyles.style20.copyWith(
-                            color: Colors.black,
+                            color: widget.isPrayerForToday
+                                ? widget.prayerState == PrayerState.next
+                                    ? AppColors.primary
+                                    : Colors.black
+                                : Colors.black,
                             fontWeight: widget.isPrayerForToday
                                 ? widget.prayerState == PrayerState.next ||
                                         widget.prayerState ==
@@ -101,7 +105,11 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
                                   ? FontWeight.bold
                                   : FontWeight.w400
                               : FontWeight.w400,
-                          color: Colors.black)),
+                          color: widget.isPrayerForToday
+                              ? widget.prayerState == PrayerState.next
+                                  ? AppColors.primary
+                                  : Colors.black
+                              : Colors.black)),
                 ],
               ),
             ),

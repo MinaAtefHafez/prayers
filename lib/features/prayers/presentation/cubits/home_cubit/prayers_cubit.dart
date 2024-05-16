@@ -160,7 +160,7 @@ class PrayersCubit extends Cubit<PrayersState> {
   }
 
   bool get isPraviousPrayerNow {
-    if (previousPrayer == null) return true;
+    if (previousPrayer == null) return false;
     final dateTimeNow = IntlHelper.dateTime();
     final previousPrayerDateAsString =
         previousPrayer?.prayerDate?.split(' ').first;
@@ -179,4 +179,11 @@ class PrayersCubit extends Cubit<PrayersState> {
     final prayer = prayerToday?.date?.gregorian?.day;
     return prayer == dayRefactor;
   }
+
+  
+  //! Other
+
+  
+ 
+
 }

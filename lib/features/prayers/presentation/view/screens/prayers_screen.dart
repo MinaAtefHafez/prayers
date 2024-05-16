@@ -17,6 +17,7 @@ import 'package:prayers/features/settings_details/presentation/settings_cubit/se
 import 'package:prayers/features/settings_details/presentation/view/widgets/getting_location_dialog.dart';
 import '../../../../../core/theme/colors/colors.dart';
 import '../widgets/prayer_item.dart';
+import 'gregorian_screen.dart';
 
 class PrayerScreen extends StatefulWidget {
   const PrayerScreen({super.key});
@@ -99,7 +100,8 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   child: PrayerItem(
                                       isPrayerNow:
                                           prayersCubit.isPraviousPrayerNow,
-                                      prayerModel: prayersCubit.previousPrayer!),
+                                      prayerModel:
+                                          prayersCubit.previousPrayer!),
                                 ),
                               ] else ...[
                                 const Expanded(child: SizedBox())
@@ -143,9 +145,12 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   padding: EdgeInsets.symmetric(
                                       vertical: 15.h, horizontal: 30.w),
                                   child: TodayItem(
-                                      prayerToday: prayersCubit.prayerToday!.date!,
+                                      prayerToday:
+                                          prayersCubit.prayerToday!.date!,
                                       onTapToday: callDatePicker,
-                                      onTapIcon: () {}),
+                                      onTapIcon: () {
+                                        context.pushNamed(GregorianScreen.name);
+                                      }),
                                 ),
                                 Divider(
                                   color: Colors.grey.withOpacity(0.7),

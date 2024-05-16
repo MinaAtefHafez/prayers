@@ -4,11 +4,14 @@ import 'package:prayers/features/settings_details/presentation/view/screens/lang
 import 'package:prayers/features/settings_details/presentation/view/screens/method_screen.dart';
 import 'package:prayers/features/settings_details/presentation/view/screens/pick_location_screen.dart';
 
+import '../../features/prayers/presentation/view/screens/gregorian_screen.dart';
+
 final navigatorKey = GlobalKey<NavigatorState>();
 
 abstract class CustomRouter {
   static Route onGenerateRoutes(RouteSettings settings) {
     final widget = switch (settings.name) {
+      GregorianScreen.name => const GregorianScreen(),
       HomeScreen.name => const HomeScreen(),
       MethodScreen.name => const MethodScreen(),
       PickLocationScreen.name => const PickLocationScreen(),

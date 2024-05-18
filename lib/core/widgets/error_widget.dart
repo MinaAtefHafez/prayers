@@ -14,22 +14,31 @@ class CustomErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 150.h,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.r), color: Colors.red),
-          child: Text(message,
-              style: AppStyles.style18.copyWith(color: Colors.black)),
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30.w),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              height: 150.h,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.r), color: Colors.red),
+              child: Text(message,
+                  style: AppStyles.style18.copyWith(color: Colors.black)),
+            ),
+            30.0.height,
+            ElevatedButton(
+              onPressed: onPressed,
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+              child: Text(tr('Reload'),
+                  style: AppStyles.style18.copyWith(color: Colors.white)),
+            ),
+          ],
         ),
-        30.0.height,
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
-          child: Text(tr('Reload')),
-        ),
-      ],
+      ),
     );
   }
 }

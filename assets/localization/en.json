@@ -45,6 +45,8 @@
    "November" : "November" ,
    "December" : "December" ,
    "Since" : "since" ,
-   "Min" : "m"
+   "Min" : "m" ,
+   "Gregorian" : "gregorian"
+
 
 }

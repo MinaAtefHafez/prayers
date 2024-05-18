@@ -7,17 +7,18 @@ import 'package:prayers/core/extensions/navigator_extension.dart';
 import 'package:prayers/core/gen/app_images.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
 import 'package:prayers/core/widgets/custom_date_picker.dart';
+import 'package:prayers/core/widgets/custom_indicator.dart';
 import 'package:prayers/core/widgets/custom_toast.dart';
 import 'package:prayers/core/widgets/error_widget.dart';
 import 'package:prayers/core/widgets/snack_bar.dart';
-import 'package:prayers/features/prayers/presentation/cubits/home_cubit/prayers_cubit.dart';
+import 'package:prayers/features/prayers/presentation/prayers_cubit/prayers_cubit.dart';
 import 'package:prayers/features/prayers/presentation/view/widgets/prayers_list_view.dart';
 import 'package:prayers/features/prayers/presentation/view/widgets/today_item.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/getting_location_dialog.dart';
 import '../../../../../core/theme/colors/colors.dart';
 import '../widgets/prayer_item.dart';
-import 'gregorian_screen.dart';
+import '../../../../gregorian/presentation/view/screens/gregorian_screen.dart';
 
 class PrayerScreen extends StatefulWidget {
   const PrayerScreen({super.key});
@@ -179,12 +180,12 @@ class _PrayerScreenState extends State<PrayerScreen> {
               );
             } else if (state is GetCalendarMonthFailure) {
               return CustomErrorWidget(
-                  message: state.errMessage, onPressed: () {});
+                  message: state.errMessage,
+                  onPressed: () {
+                    prayersCubit.getCalendarMonth();
+                  });
             } else {
-              return Center(
-                  child: CircularProgressIndicator(
-                color: AppColors.primary,
-              ));
+              return const CustomIndicator();
             }
           },
         )),

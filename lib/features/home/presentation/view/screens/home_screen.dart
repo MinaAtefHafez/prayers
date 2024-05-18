@@ -3,7 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
-import 'package:prayers/features/prayers/presentation/cubits/home_cubit/prayers_cubit.dart';
+import 'package:prayers/features/home/presentation/home_cubit/home_cubit.dart';
+import 'package:prayers/features/prayers/presentation/prayers_cubit/prayers_cubit.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
 import '../../../../../core/dependency_injection/dependency_injection.dart';
 
@@ -19,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final settingsCubit = di<SettingsCubit>();
   final prayersCubit = di<PrayersCubit>();
+  final homeCubit = di<HomeCubit>();
   late Timer timer;
   @override
   void initState() {
@@ -47,10 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PrayersCubit, PrayersState>(
-        bloc: prayersCubit,
+    return BlocBuilder<HomeCubit, HomeState>(
+        bloc: homeCubit,
         builder: (context, state) => Scaffold(
-              body: prayersCubit.screens[prayersCubit.bottomNavIndex],
+              body: homeCubit.screens[homeCubit.bottomNavIndex],
               bottomNavigationBar: BottomNavigationBar(
                   backgroundColor: Colors.white,
                   selectedItemColor: Colors.black,
@@ -60,15 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.black, applyTextScaling: true, size: 27),
                   selectedLabelStyle: AppStyles.style16.copyWith(
                       fontWeight: FontWeight.w500, color: Colors.black),
-                  currentIndex: prayersCubit.bottomNavIndex,
-                  onTap: prayersCubit.changeBottomNavIndex,
+                  currentIndex: homeCubit.bottomNavIndex,
+                  onTap: homeCubit.changeBottomNavIndex,
                   items: [
                     BottomNavigationBarItem(
                         icon: const Icon(Icons.alarm), label: tr('Prayers')),
                     BottomNavigationBarItem(
                         icon: const Icon(Icons.mosque), label: tr('Dome')),
-                    BottomNavigationBarItem(
-                        icon: const Icon(Icons.date_range), label: tr('Hijri')),
                     BottomNavigationBarItem(
                         icon: const Icon(Icons.more_horiz), label: tr('More'))
                   ]),

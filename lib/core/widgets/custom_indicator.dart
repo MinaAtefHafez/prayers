@@ -10,9 +10,9 @@ class CustomIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      color: AppColors.primary,
+      color: Colors.white,
       child: CircularProgressIndicator(
-        color: color ?? Colors.white,
+        color: color ?? AppColors.primary,
         backgroundColor: Colors.grey.shade300,
       ),
     );

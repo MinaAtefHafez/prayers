@@ -46,6 +46,8 @@
    "November" : "نوفمبر" ,
     "December" : "ديسمبر" ,
     "Since" : "منذ" ,
-    "Min" : "د"
+    "Min" : "د" ,
+    "Gregorian" : "ميلادى" 
+    
     
 }

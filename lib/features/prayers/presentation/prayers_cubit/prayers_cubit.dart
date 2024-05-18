@@ -1,15 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model_param.dart';
 import 'package:prayers/features/prayers/data/models/prayer_model.dart';
 import 'package:prayers/features/prayers/data/repository/home_repo.dart';
-import 'package:prayers/features/prayers/presentation/view/screens/dome_screen.dart';
-import 'package:prayers/features/prayers/presentation/view/screens/hijri_screen.dart';
-import 'package:prayers/features/prayers/presentation/view/screens/prayers_screen.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
-import '../../../../../core/enum/enum.dart';
-import '../../../../../core/helpers/intl_helper/intl_helper.dart';
+import '../../../../core/enum/enum.dart';
+import '../../../../core/helpers/intl_helper/intl_helper.dart';
 part 'prayers_state.dart';
 
 class PrayersCubit extends Cubit<PrayersState> {
@@ -23,18 +19,7 @@ class PrayersCubit extends Cubit<PrayersState> {
   PrayerModel? previousPrayer;
   PrayerModel? nextPrayer;
 
-  int bottomNavIndex = 0;
-
-  final List<Widget> screens = const [
-    PrayerScreen(),
-    DomeScreen(),
-    HijriScreen(),
-  ];
-
-  void changeBottomNavIndex(int index) {
-    bottomNavIndex = index;
-    emit(BottomNavBar());
-  }
+  
 
   //! Calendar
 
@@ -180,10 +165,8 @@ class PrayersCubit extends Cubit<PrayersState> {
     return prayer == dayRefactor;
   }
 
-  
-  //! Other
 
-  
+
  
 
 }

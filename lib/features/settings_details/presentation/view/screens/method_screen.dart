@@ -7,7 +7,7 @@ import 'package:prayers/core/extensions/distance_extention.dart';
 import 'package:prayers/core/extensions/navigator_extension.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
 import 'package:prayers/core/theme/colors/colors.dart';
-import 'package:prayers/features/prayers/presentation/view/screens/home_screen.dart';
+import 'package:prayers/features/home/presentation/view/screens/home_screen.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/method_text_field.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/methods_bottom_sheet.dart';

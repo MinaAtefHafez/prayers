@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prayers/core/extensions/distance_extention.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
@@ -69,18 +70,19 @@ class _PrayerItemState extends State<PrayerItem> with TickerProviderStateMixin {
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.r),
-              color: Colors.white.withOpacity(0.3) 
-            ),
-            child: Visibility(
-              visible: widget.isPrayerNext,
-              replacement: Text(
-                  '${tr('Since')} ${widget.prayerModel.differnece!}${tr('Min')}',
-                  style: AppStyles.style18.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.w600)),
-              child: Text('${widget.prayerModel.differnece!}${tr('Min')}',
-                  style: AppStyles.style18.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.w600)),
+                borderRadius: BorderRadius.circular(20.r),
+                color: Colors.white.withOpacity(0.3)),
+            child: FittedBox(
+              child: Visibility(
+                visible: widget.isPrayerNext,
+                replacement: Text(
+                    '${tr('Since')} ${widget.prayerModel.differnece!}${tr('Min')}',
+                    style: AppStyles.style18.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.w600)),
+                child: Text('${widget.prayerModel.differnece!}${tr('Min')}',
+                    style: AppStyles.style18.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.w600)),
+              ),
             ),
           ),
         ),

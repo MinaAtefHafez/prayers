@@ -7,7 +7,7 @@ import 'package:prayers/core/routes/routes.dart';
 import 'package:prayers/core/theme/app_theme.dart';
 import 'package:prayers/features/settings_details/presentation/view/screens/language_screen.dart';
 import 'core/helpers/localization_helper/localization/localization_utils.dart';
-import 'features/prayers/presentation/view/screens/home_screen.dart';
+import 'features/home/presentation/view/screens/home_screen.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
       ensureScreenSize: true,
       builder: (context, child) {
         LocalizationUtils.init(context);
+        LocalizationUtils.changeLocale('ar');
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: SharedPref.getValue(LocalStorageKeys.location) != null

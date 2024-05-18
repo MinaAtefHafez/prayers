@@ -55,7 +55,7 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
             child: Container(
               padding: widget.isPrayerForToday
                   ? widget.prayerState == PrayerState.next
-                      ? EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w)
+                      ? EdgeInsets.symmetric(horizontal: 10.w)
                       : null
                   : null,
               decoration: BoxDecoration(

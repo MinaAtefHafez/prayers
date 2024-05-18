@@ -29,6 +29,7 @@ class _GregorianScreenState extends State<GregorianScreen> {
     gregorianCubit.getYearNowLocal().then((value) async {
       await gregorianCubit.getGregorianForYearApiOrLocal();
       await gregorianCubit.getgregorianMonthNowFromGregorianModel();
+      await gregorianCubit.getHijriMonthNowFromGregorianModel();
     });
   }
 
@@ -38,43 +39,45 @@ class _GregorianScreenState extends State<GregorianScreen> {
       value: gregorianCubit,
       child: BlocBuilder<GregorianCubit, GregorianState>(
         builder: (context, state) {
-          if (gregorianCubit.gregorianYear.isNotEmpty &&
-              gregorianCubit.gregorianMonth != null) {
+          if (gregorianCubit.showMonth != null) {
             return Scaffold(
               appBar: AppBar(
                 title: Text(settingsCubit.location!.locationName!),
                 actions: [
                   GregorianHijriButton(
-                    text: 'Gregorian',
-                    isChoosen: true,
-                    onTap: () {},
-                  ),
+                      text: 'Gregorian',
+                      isChoosen: gregorianCubit.isShowGregorian,
+                      onTap: ()  {
+                        gregorianCubit.chooseGregorianPicker();
+                      }),
                   Padding(
                       padding: EdgeInsets.only(left: 25.w, right: 25.w),
                       child: GregorianHijriButton(
-                        isChoosen: false,
-                        text: 'Hijri',
-                        onTap: () {},
-                      )),
+                          isChoosen: gregorianCubit.isShowHijri,
+                          text: 'Hijri',
+                          onTap: ()  {
+                            gregorianCubit.chooseHijriPicker();
+                          })),
                 ],
                 bottom: PreferredSize(
                     preferredSize: Size.fromHeight(150.h),
                     child: GregorianTopPart(
-                      back: gregorianCubit.changeToPreviousgregorianMonth,
-                      next: gregorianCubit.changeToNextgregorianMonth,
-                      month: gregorianCubit.gregorianMonth!,
-                      year: gregorianCubit.yearNowLocal!,
+                      back:
+                          gregorianCubit.changeToPreviousGregorianOrHijriMonth,
+                      next: gregorianCubit.changeToNextGregorianOrHijriMonth,
+                      month: gregorianCubit.showMonth!,
+                      year: gregorianCubit.showYear!,
                     )),
               ),
               body: ListView.separated(
-                itemCount: gregorianCubit.gregorianYear.length,
+                itemCount: gregorianCubit.gregorianYearList.length,
                 separatorBuilder: (context, index) => Divider(
                   height: 0,
                   color: Colors.grey.shade300,
                   thickness: 1,
                 ),
                 itemBuilder: (context, index) => GregorianListViewItem(
-                    gregorianYear: gregorianCubit.gregorianYear[index]),
+                    gregorianYear: gregorianCubit.gregorianYearList[index]),
               ),
             );
           } else {

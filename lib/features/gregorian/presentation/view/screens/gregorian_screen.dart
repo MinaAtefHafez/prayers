@@ -47,17 +47,13 @@ class _GregorianScreenState extends State<GregorianScreen> {
                   GregorianHijriButton(
                       text: 'Gregorian',
                       isChoosen: gregorianCubit.isShowGregorian,
-                      onTap: ()  {
-                        gregorianCubit.chooseGregorianPicker();
-                      }),
+                      onTap: gregorianCubit.chooseGregorianPicker),
                   Padding(
                       padding: EdgeInsets.only(left: 25.w, right: 25.w),
                       child: GregorianHijriButton(
                           isChoosen: gregorianCubit.isShowHijri,
                           text: 'Hijri',
-                          onTap: ()  {
-                            gregorianCubit.chooseHijriPicker();
-                          })),
+                          onTap: gregorianCubit.chooseHijriPicker)),
                 ],
                 bottom: PreferredSize(
                     preferredSize: Size.fromHeight(150.h),

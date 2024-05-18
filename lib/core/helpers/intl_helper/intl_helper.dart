@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 
 abstract class IntlHelper {
-  static String yearNow = DateTime.now().year.toString();
-  static String monthNow = DateTime.now().month.toString();
-  static String dayNow = DateTime.now().day.toString();
+  static String get yearNow => DateTime.now().year.toString();
+  static String get monthNow => DateTime.now().month.toString();
+  static String get dayNow => DateTime.now().day.toString();
 
   static String dateAsString([DateTime? dateTime]) =>
       DateFormat('HH:mm').format(dateTime ?? DateTime.now());

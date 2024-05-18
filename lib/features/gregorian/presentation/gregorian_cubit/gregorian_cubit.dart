@@ -73,14 +73,15 @@ class GregorianCubit extends Cubit<GregorianState> {
 
   Future<void> getgregorianMonthNowFromGregorianModel() async {
     gregorianYearList = gregorianModel!.data[gregorianMonth]!;
-    gregorian.year = gregorianYearList[0].date!.gregorian!.year;
-    gregorian.month = gregorianYearList[0].date!.gregorian!.month!.en!;
+    gregorian =
+        gregorian.copyWith(year: gregorianYearList[0].date!.gregorian!.year);
+    gregorian = gregorian.copyWith(
+        month: gregorianYearList[0].date!.gregorian!.month!.en!);
     emit(ChangeMonth());
   }
 
   Future<void> getHijriMonthNowFromGregorianModel() async {
-    hijriMonth = IntlHelper.monthNow;
-    gregorianYearList = gregorianModel!.data[gregorianMonth]!;
+    gregorianYearList = gregorianModel!.data[hijriMonth]!;
     hijri = hijri.copyWith(year: gregorianYearList[0].date!.hijri!.year);
     hijri = hijri.copyWith(
         month: LocalizationUtils.isArabic
@@ -142,13 +143,15 @@ class GregorianCubit extends Cubit<GregorianState> {
     emit(ChangeMonth());
   }
 
+  bool get isShowGregorian => gregorian.isShow!;
+
+  bool get isShowHijri => hijri.isShow!;
+
   String? get showMonth => isShowGregorian ? gregorian.month : hijri.month;
 
   String? get showYear => isShowGregorian ? gregorian.year : hijri.year;
 
-  bool get isShowGregorian => gregorian.isShow!;
-
-  bool get isShowHijri => hijri.isShow!;
+  
 
   void chooseGregorianPicker() {
     gregorian = gregorian.copyWith(isShow: true);

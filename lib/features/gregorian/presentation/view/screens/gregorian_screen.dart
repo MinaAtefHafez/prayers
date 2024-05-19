@@ -44,7 +44,7 @@ class _GregorianScreenState extends State<GregorianScreen> {
       value: gregorianCubit,
       child: BlocBuilder<GregorianCubit, GregorianState>(
         builder: (context, state) {
-          if (gregorianCubit.showMonth != null) {
+          if (gregorianCubit.showMonth != null  ) {
             return Scaffold(
               appBar: AppBar(
                 title: Text(settingsCubit.location!.locationName!),

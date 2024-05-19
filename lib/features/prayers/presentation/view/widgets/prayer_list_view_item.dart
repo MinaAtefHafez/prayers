@@ -71,7 +71,7 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
                     padding: widget.isPrayerForToday
                         ? widget.prayerState == PrayerState.previous
                             ? EdgeInsets.symmetric(
-                                vertical: 5.h, horizontal: 15.w)
+                                vertical: 2.h, horizontal: 15.w)
                             : null
                         : null,
                     decoration: widget.isPrayerForToday
@@ -114,7 +114,7 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
               ),
             ),
           ),
-          70.0.width,
+          40.0.width,
           const Icon(Icons.mic),
         ],
       ),

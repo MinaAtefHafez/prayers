@@ -6,4 +6,5 @@ abstract class LocalStorageKeys {
   static const yearNow = 'yearNow';
   static const hijriCalendar = 'HijriCalendar';
   static const hijriYear = 'hijriYear';
+  static const prayerYearNow = 'prayerYearNow';
 }

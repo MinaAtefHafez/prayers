@@ -17,7 +17,7 @@ abstract class GregorianRepo {
   Future<void> saveGregorianYearLocal(Map<String, dynamic> data);
   Future<GregorianModel> getGregorianForYearLocal();
   Future<void> saveYearNowLocal();
-  Future<String> getYearNowLocal();
+  Future<String?> getYearNowLocal();
   Future<Either<Failure, (GregorianModel, Map<String, dynamic>)>>
       getHijriCalendarYear(Map<String, dynamic> param);
   Future<void> saveHijriCalendarYearLocal(Map<String, dynamic> data);
@@ -62,8 +62,8 @@ class GregorianRepoImpl implements GregorianRepo {
   }
 
   @override
-  Future<String> getYearNowLocal() async {
-    final data = SharedPref.getValue(LocalStorageKeys.yearNow) as String;
+  Future<String?> getYearNowLocal() async {
+    final data = SharedPref.getValue(LocalStorageKeys.yearNow) as String?;
     return data;
   }
 
@@ -89,7 +89,7 @@ class GregorianRepoImpl implements GregorianRepo {
 
   @override
   Future<String?> getHijriYearNowLocal() async {
-    final data = SharedPref.getValue(LocalStorageKeys.hijriYear) as String;
+    final data = SharedPref.getValue(LocalStorageKeys.hijriYear) as String?;
     return data;
   }
 

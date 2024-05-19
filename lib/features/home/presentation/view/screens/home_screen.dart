@@ -32,8 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
     await Future.wait([
       settingsCubit.getMothodLocal(),
       settingsCubit.getLocationLocal(),
+      prayersCubit.getYearNowLocal()
     ]);
-    await prayersCubit.getCalendarMonth();
+    await prayersCubit.callCalendarApiOrLocal();
+    await prayersCubit.getPrayers();
+    await prayersCubit.getPreviousPrayerForToday();
+    await prayersCubit.getNextPrayerForToday();
     timer = Timer.periodic(const Duration(seconds: 30), (timer) async {
       await prayersCubit.getPrayers();
       await prayersCubit.getPreviousPrayerForToday();
@@ -70,7 +74,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     BottomNavigationBarItem(
                         icon: const Icon(Icons.mosque), label: tr('Dome')),
                     BottomNavigationBarItem(
-                        icon: const Icon(Icons.more_horiz), label: tr('Settings'))
+                        icon: const Icon(Icons.more_horiz),
+                        label: tr('Settings'))
                   ]),
             ));
   }

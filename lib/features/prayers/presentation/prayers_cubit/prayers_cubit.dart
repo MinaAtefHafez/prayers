@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model_param.dart';
@@ -9,8 +11,7 @@ import '../../../../core/helpers/intl_helper/intl_helper.dart';
 part 'prayers_state.dart';
 
 class PrayersCubit extends Cubit<PrayersState> {
-  PrayersCubit(this._homeRepo, this._settingsCubit) : 
-  super(PrayersInitial());
+  PrayersCubit(this._homeRepo, this._settingsCubit) : super(PrayersInitial());
 
   final HomeRepo _homeRepo;
   final SettingsCubit _settingsCubit;
@@ -18,8 +19,7 @@ class PrayersCubit extends Cubit<PrayersState> {
   Datum? prayerToday;
   PrayerModel? previousPrayer;
   PrayerModel? nextPrayer;
-
-  
+  String? yearNowLocal;
 
   //! Calendar
 
@@ -36,6 +36,7 @@ class PrayersCubit extends Cubit<PrayersState> {
     }, (data) async {
       calendarMonthModel = data.$1;
       await saveCalendarMonthLocal(data.$2);
+      await saveYearNowLocal();
       emit(GetCalendarMonthSuccess());
     });
   }
@@ -66,7 +67,7 @@ class PrayersCubit extends Cubit<PrayersState> {
         final prayerNowAsString = prayers[index].prayerDate!.split(' ').first;
         final prayerNow = IntlHelper.dateTime(prayerNowAsString);
         final difference = dateTimeNow.difference(prayerNow).inMinutes;
-        if (difference > 0 && difference <= 60) {
+        if (difference > 0 && difference <= 300) {
           prayer = prayers[index];
           break;
         }
@@ -74,9 +75,11 @@ class PrayersCubit extends Cubit<PrayersState> {
 
       if (index < prayers.length - 1) {
         final prayerNowAsString = prayers[index].prayerDate!.split(' ').first;
+
         final prayerNow = IntlHelper.dateTime(prayerNowAsString);
         final paryerNextAsString =
             prayers[index + 1].prayerDate!.split(' ').first;
+        
         final prayerNext = IntlHelper.dateTime(paryerNextAsString);
         final bool isPrayerNowBeforeDateTime = prayerNow.isBefore(dateTimeNow);
         final bool isPrayerNextAfterDateTime = prayerNext.isAfter(dateTimeNow);
@@ -165,8 +168,21 @@ class PrayersCubit extends Cubit<PrayersState> {
     return prayer == dayRefactor;
   }
 
+  Future<void> saveYearNowLocal() async {
+    await _homeRepo.saveYearNowLocal();
+  }
 
+  Future<void> getYearNowLocal() async {
+    final result = await _homeRepo.getYearNowLocal();
+    yearNowLocal = result;
+  }
 
- 
-
+  Future<void> callCalendarApiOrLocal() async {
+    final yearNow = IntlHelper.yearNow;
+    if (yearNow == yearNowLocal) {
+      getCalendarMonthYearLocal();
+    } else {
+      getCalendarMonth();
+    }
+  }
 }

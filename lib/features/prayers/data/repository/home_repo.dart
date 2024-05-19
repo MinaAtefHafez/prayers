@@ -14,6 +14,8 @@ abstract class HomeRepo {
       getCalendarMonth(Map<String, dynamic> param);
   Future<void> saveCalendarMonthLocal(Map<String, dynamic> calendar);
   Future<CalendarMonthModel> getCalendarYearLocal();
+  Future<void> saveYearNowLocal();
+  Future<String?> getYearNowLocal();
 }
 
 class HomeRepoImpl implements HomeRepo {
@@ -47,5 +49,17 @@ class HomeRepoImpl implements HomeRepo {
     final result =
         SharedPref.getValue(LocalStorageKeys.calendarMonth) as String;
     return Future.value(CalendarMonthModel.fromJson(jsonDecode(result)));
+  }
+
+  @override
+  Future<void> saveYearNowLocal() async {
+    SharedPref.setValue(LocalStorageKeys.prayerYearNow,
+        value: IntlHelper.yearNow);
+  }
+
+  @override
+  Future<String?> getYearNowLocal() async {
+    final data = SharedPref.getValue(LocalStorageKeys.prayerYearNow) as String?;
+    return data;
   }
 }

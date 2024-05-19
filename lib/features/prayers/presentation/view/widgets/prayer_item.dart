@@ -62,7 +62,7 @@ class _PrayerItemState extends State<PrayerItem> with TickerProviderStateMixin {
           ),
         ],
         Text(widget.prayerModel.prayerDate!.split(' ').first,
-            style: AppStyles.style30
+            style: AppStyles.style25
                 .copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
         10.0.height,
         IntrinsicWidth(

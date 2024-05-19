@@ -58,7 +58,8 @@ class TodayItem extends StatelessWidget {
         ),
         const Spacer(),
         IconButton(
-            onPressed: onTapIcon, icon: const Icon(Icons.calendar_month)),
+            onPressed: onTapIcon, icon:  Icon(Icons.calendar_month ,
+            color : Colors.grey.shade500 )),
       ],
     );
   }

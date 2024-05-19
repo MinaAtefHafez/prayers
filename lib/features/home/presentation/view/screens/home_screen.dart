@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     BottomNavigationBarItem(
                         icon: const Icon(Icons.mosque), label: tr('Dome')),
                     BottomNavigationBarItem(
-                        icon: const Icon(Icons.more_horiz), label: tr('More'))
+                        icon: const Icon(Icons.more_horiz), label: tr('Settings'))
                   ]),
             ));
   }

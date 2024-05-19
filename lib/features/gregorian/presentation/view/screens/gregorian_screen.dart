@@ -5,10 +5,10 @@ import 'package:prayers/core/widgets/custom_indicator.dart';
 import 'package:prayers/features/gregorian/presentation/gregorian_cubit/gregorian_cubit.dart';
 import 'package:prayers/features/gregorian/presentation/gregorian_cubit/gregorian_state.dart';
 import 'package:prayers/features/gregorian/presentation/view/widgets/gregorian_hijri_button.dart';
-import 'package:prayers/features/gregorian/presentation/view/widgets/gregorian_list_view_item.dart';
 import 'package:prayers/features/gregorian/presentation/view/widgets/gregorian_top_part.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
 import '../../../../../core/dependency_injection/dependency_injection.dart';
+import '../widgets/gregorian_hijri_list_view.dart';
 
 class GregorianScreen extends StatefulWidget {
   const GregorianScreen({super.key});
@@ -26,11 +26,16 @@ class _GregorianScreenState extends State<GregorianScreen> {
   @override
   void initState() {
     super.initState();
-    gregorianCubit.getYearNowLocal().then((value) async {
-      await gregorianCubit.getGregorianForYearApiOrLocal();
-      await gregorianCubit.getgregorianMonthNowFromGregorianModel();
-      await gregorianCubit.getHijriMonthNowFromGregorianModel();
-    });
+    call();
+  }
+
+  void call() async {
+    await gregorianCubit.getYearNowLocal();
+    await gregorianCubit.getHijriForYearLocal();
+    await gregorianCubit.getGregorianForYearApiOrLocal();
+    await gregorianCubit.callHijriCalendarApiOrLocal();
+    await gregorianCubit.getgregorianMonthNowFromGregorianModel();
+    await gregorianCubit.getHijriMonthNowFromGregorianModel();
   }
 
   @override
@@ -65,15 +70,9 @@ class _GregorianScreenState extends State<GregorianScreen> {
                       year: gregorianCubit.showYear!,
                     )),
               ),
-              body: ListView.separated(
-                itemCount: gregorianCubit.gregorianYearList.length,
-                separatorBuilder: (context, index) => Divider(
-                  height: 0,
-                  color: Colors.grey.shade300,
-                  thickness: 1,
-                ),
-                itemBuilder: (context, index) => GregorianListViewItem(
-                    gregorianYear: gregorianCubit.gregorianYearList[index]),
+              body: GregorianHijriListView(
+                isGregorian: gregorianCubit.isShowGregorian,
+                list: gregorianCubit.showPrayersList,
               ),
             );
           } else {

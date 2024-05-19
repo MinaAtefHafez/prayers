@@ -14,3 +14,8 @@ final class GetGregorianYearLocalSuccess extends GregorianState {}
 
 
 final class ChangeMonth extends GregorianState {}
+
+
+//! Hijri 
+
+final class GetHijriCalendar extends GregorianState {}

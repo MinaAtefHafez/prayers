@@ -5,9 +5,11 @@ import 'package:prayers/core/theme/colors/colors.dart';
 import 'package:prayers/features/gregorian/data/models/gregorian_year_model.dart';
 
 class GregorianListViewItem extends StatelessWidget {
-  const GregorianListViewItem({super.key, required this.gregorianYear});
+  const GregorianListViewItem(
+      {super.key, required this.gregorianYear, required this.isGregorian});
 
   final GregorianYear gregorianYear;
+  final bool isGregorian;
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +23,11 @@ class GregorianListViewItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.primary.withOpacity(0.15),
             ),
-            child: Builder(builder: (context) {
-              final day = gregorianYear.date!.gregorian!.day!.split('').first;
-              final dayRefactor = day == '0'
-                  ? gregorianYear.date!.gregorian!.day!.split('').last
-                  : gregorianYear.date!.gregorian!.day!;
-              return Text(dayRefactor,
-                  style: AppStyles.style18.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                  ));
-            }),
+            child: Text(getDay,
+                style: AppStyles.style18.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                )),
           ),
           Expanded(
               child: Center(
@@ -59,5 +55,19 @@ class GregorianListViewItem extends StatelessWidget {
                 style: AppStyles.style16.copyWith(color: Colors.grey.shade500)),
           )),
         ]));
+  }
+
+  String get getDay {
+    final gregorianDay = gregorianYear.date!.gregorian!.day!.split('').first;
+    final gregorianDayRefactor = gregorianDay == '0'
+        ? gregorianYear.date!.gregorian!.day!.split('').last
+        : gregorianYear.date!.gregorian!.day!;
+
+    final hijriDay = gregorianYear.date!.hijri!.day!.split('').first;
+    final hijriDayRefactor = hijriDay == '0'
+        ? gregorianYear.date!.hijri!.day!.split('').last
+        : gregorianYear.date!.hijri!.day!;
+
+    return isGregorian ? gregorianDayRefactor : hijriDayRefactor;
   }
 }

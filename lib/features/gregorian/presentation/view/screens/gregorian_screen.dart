@@ -61,7 +61,7 @@ class _GregorianScreenState extends State<GregorianScreen> {
                           onTap: gregorianCubit.chooseHijriPicker)),
                 ],
                 bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(150.h),
+                    preferredSize: Size.fromHeight(170.h),
                     child: GregorianTopPart(
                       back:
                           gregorianCubit.changeToPreviousGregorianOrHijriMonth,

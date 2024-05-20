@@ -23,8 +23,9 @@ class GregorianTopPart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+       
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          padding: EdgeInsets.symmetric(horizontal: 20.w  ),
           child: Row(
             children: [
               IconButton(

@@ -12,10 +12,14 @@ final class GetGregorianYearFailure extends GregorianState {
 
 final class GetGregorianYearLocalSuccess extends GregorianState {}
 
-
 final class ChangeMonth extends GregorianState {}
 
+//! Hijri
 
-//! Hijri 
+final class GetHijriCalendarSuccess extends GregorianState {}
 
-final class GetHijriCalendar extends GregorianState {}
+final class GetHijriCalendarFromApiFailure extends GregorianState {
+  final String errMessage;
+
+  GetHijriCalendarFromApiFailure(this.errMessage);
+}

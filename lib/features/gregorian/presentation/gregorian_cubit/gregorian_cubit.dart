@@ -116,13 +116,13 @@ class GregorianCubit extends Cubit<GregorianState> {
     };
     final result = await _gregorianRepo.getHijriCalendarYear(param);
     result.fold((failure) {
-      emit(GetGregorianYearFailure(failure.message));
+      emit(GetHijriCalendarFromApiFailure(failure.message));
     }, (r) async {
       hijriModel = r.$1;
       await saveHijriCalendarForYear(r.$2);
       await saveHijriYearNow();
       await getHijriCalendarLocal();
-      emit(GetHijriCalendar());
+      emit(GetHijriCalendarSuccess());
     });
   }
 
@@ -133,7 +133,7 @@ class GregorianCubit extends Cubit<GregorianState> {
   Future<void> getHijriCalendarLocal() async {
     final result = await _gregorianRepo.getHijriCalendarYearLocal();
     hijriModel = result;
-    emit(GetHijriCalendar());
+    emit(GetHijriCalendarSuccess());
   }
 
   Future<void> saveHijriYearNow() async {
@@ -155,7 +155,7 @@ class GregorianCubit extends Cubit<GregorianState> {
     }
   }
 
-  Future<void> getHijriMonthNowFromGregorianModel() async {
+  Future<void> getHijriMonthNowFromHijriModel() async {
     hijriYearList = hijriModel!.data[hijriMonth]!;
     hijri = hijri.copyWith(
         month: LocalizationUtils.isArabic

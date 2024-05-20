@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prayers/core/widgets/custom_indicator.dart';
+import 'package:prayers/core/widgets/error_widget.dart';
 import 'package:prayers/features/gregorian/presentation/gregorian_cubit/gregorian_cubit.dart';
 import 'package:prayers/features/gregorian/presentation/gregorian_cubit/gregorian_state.dart';
 import 'package:prayers/features/gregorian/presentation/view/widgets/gregorian_hijri_button.dart';
@@ -35,7 +36,7 @@ class _GregorianScreenState extends State<GregorianScreen> {
     await gregorianCubit.getGregorianForYearApiOrLocal();
     await gregorianCubit.callHijriCalendarApiOrLocal();
     await gregorianCubit.getgregorianMonthNowFromGregorianModel();
-    await gregorianCubit.getHijriMonthNowFromGregorianModel();
+    await gregorianCubit.getHijriMonthNowFromHijriModel();
   }
 
   @override
@@ -44,7 +45,7 @@ class _GregorianScreenState extends State<GregorianScreen> {
       value: gregorianCubit,
       child: BlocBuilder<GregorianCubit, GregorianState>(
         builder: (context, state) {
-          if (gregorianCubit.showMonth != null  ) {
+          if (gregorianCubit.showMonth != null) {
             return Scaffold(
               appBar: AppBar(
                 title: Text(settingsCubit.location!.locationName!),
@@ -75,6 +76,18 @@ class _GregorianScreenState extends State<GregorianScreen> {
                 list: gregorianCubit.showPrayersList,
               ),
             );
+          } else if (state is GetGregorianYearFailure) {
+            return CustomErrorWidget(
+                message: state.errMessage,
+                onPressed: () {
+                  gregorianCubit.getGregorianForYear();
+                });
+          } else if (state is GetHijriCalendarFromApiFailure) {
+           return CustomErrorWidget(
+                message: state.errMessage,
+                onPressed: () {
+                  gregorianCubit.getHijriCalendarForYear();
+                });
           } else {
             return const CustomIndicator();
           }

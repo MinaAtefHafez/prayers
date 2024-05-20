@@ -25,7 +25,6 @@ class _MyAppState extends State<MyApp> {
       ensureScreenSize: true,
       builder: (context, child) {
         LocalizationUtils.init(context);
-        LocalizationUtils.changeLocale('ar');
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           initialRoute: SharedPref.getValue(LocalStorageKeys.location) != null

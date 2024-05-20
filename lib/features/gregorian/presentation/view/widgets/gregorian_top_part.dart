@@ -69,7 +69,7 @@ class GregorianTopPart extends StatelessWidget {
         30.0.height,
         Row(
           children: [
-            70.0.width,
+            65.0.width,
             const Expanded(child: TabBarTextGregorian(text: 'Fajr')),
             const Expanded(child: TabBarTextGregorian(text: 'Dhuhr')),
             const Expanded(child: TabBarTextGregorian(text: 'Asr')),

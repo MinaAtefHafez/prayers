@@ -10,11 +10,4 @@ abstract class IntlHelper {
       () => DateFormat.Hm().format(dateTime ?? DateTime.now()));
   static DateTime dateTime([String? dateTime]) => Intl.withLocale(
       'en', () => DateFormat.Hm().parse(dateTime ?? dateAsString()));
-
-  static String getTimeAsString(Duration duration) {
-    String negativeSign = duration.isNegative ? '-' : '';
-    String twoDigits(int n) => n.toString().padLeft(2, "0");
-    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60).abs());
-    return "$negativeSign${twoDigits(duration.inHours)}:$twoDigitMinutes";
-  }
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model_param.dart';
@@ -54,8 +52,12 @@ class PrayersCubit extends Cubit<PrayersState> {
   Future<void> getPrayers([String? searchDay]) async {
     final String day = searchDay ?? IntlHelper.dayNow;
     final String dayRefactor = day.length == 1 ? '0$day' : day;
-    prayerToday = calendarMonthModel!.data
-        .singleWhere((element) => element.date!.gregorian!.day == dayRefactor);
+    for (var e in calendarMonthModel!.data) {
+      if (e.date!.gregorian!.day == dayRefactor) {
+        prayerToday = e;
+        break;
+      }
+    }
     emit(GetPrayerToday());
   }
 
@@ -79,7 +81,7 @@ class PrayersCubit extends Cubit<PrayersState> {
         final prayerNow = IntlHelper.dateTime(prayerNowAsString);
         final paryerNextAsString =
             prayers[index + 1].prayerDate!.split(' ').first;
-        
+
         final prayerNext = IntlHelper.dateTime(paryerNextAsString);
         final bool isPrayerNowBeforeDateTime = prayerNow.isBefore(dateTimeNow);
         final bool isPrayerNextAfterDateTime = prayerNext.isAfter(dateTimeNow);
@@ -180,9 +182,9 @@ class PrayersCubit extends Cubit<PrayersState> {
   Future<void> callCalendarApiOrLocal() async {
     final yearNow = IntlHelper.yearNow;
     if (yearNow == yearNowLocal) {
-      getCalendarMonthYearLocal();
+     await getCalendarMonthYearLocal();
     } else {
-      getCalendarMonth();
+     await getCalendarMonth();
     }
   }
 }

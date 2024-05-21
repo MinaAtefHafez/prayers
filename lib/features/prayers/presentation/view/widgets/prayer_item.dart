@@ -49,20 +49,20 @@ class _PrayerItemState extends State<PrayerItem> with TickerProviderStateMixin {
             opacity: _animation,
             child: FittedBox(
               child: Text(tr(widget.prayerModel.prayerName!),
-                  style: AppStyles.style25.copyWith(
+                  style: AppStyles.style23.copyWith(
                       color: Colors.white, fontWeight: FontWeight.bold)),
             ),
           ),
         ] else ...[
           FittedBox(
             child: Text(tr(widget.prayerModel.prayerName!),
-                style: AppStyles.style25.copyWith(
-                    color: Colors.white, fontWeight: FontWeight.bold)),
+                style: AppStyles.style23.copyWith(
+                    color: Colors.white, fontWeight: FontWeight.w700)),
           ),
         ],
         Text(widget.prayerModel.prayerDate!.split(' ').first,
             style: AppStyles.style25
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold)),
+                .copyWith(color: Colors.white, fontWeight: FontWeight.w700)),
         10.0.height,
         IntrinsicWidth(
           child: Container(
@@ -76,11 +76,11 @@ class _PrayerItemState extends State<PrayerItem> with TickerProviderStateMixin {
                 visible: widget.isPrayerNext,
                 replacement: Text(
                     '${tr('Since')} ${widget.prayerModel.differnece!}${tr('Min')}',
-                    style: AppStyles.style18.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.w600)),
+                    style: AppStyles.style16.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.w500)),
                 child: Text('${widget.prayerModel.differnece!}${tr('Min')}',
-                    style: AppStyles.style18.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.w600)),
+                    style: AppStyles.style16.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.w500)),
               ),
             ),
           ),

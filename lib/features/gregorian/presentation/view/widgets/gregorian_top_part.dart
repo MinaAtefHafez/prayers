@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prayers/core/extensions/distance_extention.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
-
 import '../../../../prayers/presentation/view/widgets/tab_bar_text_gregorian.dart';
 
 class GregorianTopPart extends StatelessWidget {

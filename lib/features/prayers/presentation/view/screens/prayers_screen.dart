@@ -144,7 +144,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.symmetric(
-                                      vertical: 15.h, horizontal: 30.w),
+                                      vertical: 13.h, horizontal: 30.w),
                                   child: TodayItem(
                                       prayerToday:
                                           prayersCubit.prayerToday!.date!,
@@ -159,16 +159,12 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   height: 0,
                                 ),
                                 Expanded(
-                                    child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 30.w),
-                                  child: PrayersListView(
-                                      isPrayersForToday:
-                                          prayersCubit.isPrayersForToday,
-                                      prayerState: prayersCubit.getPrayerState,
-                                      prayers: prayersCubit
-                                          .prayerToday!.timings!.prayers),
-                                )),
+                                    child: PrayersListView(
+                                        isPrayersForToday:
+                                            prayersCubit.isPrayersForToday,
+                                        prayerState: prayersCubit.getPrayerState,
+                                        prayers: prayersCubit
+                                            .prayerToday!.timings!.prayers)),
                               ],
                             ),
                           ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prayers/core/dependency_injection/dependency_injection.dart';
 import 'package:prayers/core/extensions/assets_images.dart';
+import 'package:prayers/core/extensions/distance_extention.dart';
 import 'package:prayers/core/extensions/navigator_extension.dart';
 import 'package:prayers/core/gen/app_images.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
@@ -67,12 +68,13 @@ class _PrayerScreenState extends State<PrayerScreen> {
                             children: [
                               Row(
                                 children: [
+                                  Icon(Icons.location_city,
+                                      color: Colors.grey.shade300),
+                                  15.0.width,
                                   Text(settingsCubit.location!.locationName!,
                                       style: AppStyles.style20.copyWith(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600)),
-                                  const Icon(Icons.arrow_drop_down,
-                                      color: Colors.white),
                                 ],
                               ),
                               const Spacer(),
@@ -138,7 +140,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(40.r)),
+                                  top: Radius.circular(20.r)),
                             ),
                             child: Column(
                               children: [
@@ -162,7 +164,8 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                     child: PrayersListView(
                                         isPrayersForToday:
                                             prayersCubit.isPrayersForToday,
-                                        prayerState: prayersCubit.getPrayerState,
+                                        prayerState:
+                                            prayersCubit.getPrayerState,
                                         prayers: prayersCubit
                                             .prayerToday!.timings!.prayers)),
                               ],

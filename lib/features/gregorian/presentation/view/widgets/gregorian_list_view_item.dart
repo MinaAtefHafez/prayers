@@ -24,7 +24,8 @@ class GregorianListViewItem extends StatelessWidget {
               color: AppColors.primary.withOpacity(0.15),
             ),
             child: Text(getDay,
-                style: AppStyles.style18.copyWith(
+                style: AppStyles.style20.copyWith(
+                  
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
                 )),
@@ -32,27 +33,32 @@ class GregorianListViewItem extends StatelessWidget {
           Expanded(
               child: Center(
             child: Text(gregorianYear.timings!.fajr!.split(' ').first,
-                style: AppStyles.style16.copyWith(color: Colors.grey.shade500)),
+                style: AppStyles.style16.copyWith(
+                    color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
           )),
           Expanded(
               child: Center(
             child: Text(gregorianYear.timings!.dhuhr!.split(' ').first,
-                style: AppStyles.style16.copyWith(color: Colors.grey.shade500)),
+                style: AppStyles.style16.copyWith(
+                    color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
           )),
           Expanded(
               child: Center(
             child: Text(gregorianYear.timings!.asr!.split(' ').first,
-                style: AppStyles.style16.copyWith(color: Colors.grey.shade500)),
+                style: AppStyles.style16.copyWith(
+                    color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
           )),
           Expanded(
               child: Center(
             child: Text(gregorianYear.timings!.maghrib!.split(' ').first,
-                style: AppStyles.style16.copyWith(color: Colors.grey.shade500)),
+                style: AppStyles.style16.copyWith(
+                    color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
           )),
           Expanded(
               child: Center(
             child: Text(gregorianYear.timings!.isha!.split(' ').first,
-                style: AppStyles.style16.copyWith(color: Colors.grey.shade500)),
+                style: AppStyles.style16.copyWith(
+                    color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
           )),
         ]));
   }

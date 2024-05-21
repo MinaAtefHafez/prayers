@@ -51,7 +51,7 @@ class TodayItem extends StatelessWidget {
                 return Text('$day $month ${prayerToday.hijri!.year}',
                     style: AppStyles.style16.copyWith(
                         color: Colors.grey.shade600,
-                        fontWeight: FontWeight.w600));
+                        fontWeight: FontWeight.w400));
               })
             ],
           ),

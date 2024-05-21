@@ -66,7 +66,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     SettingsButton(
                         text: 'Next',
                         onPressed: () {
-                          context.pushNamed(PickLocationScreen.name);
+                          context.pushNamedReplacement(PickLocationScreen.name);
                         }),
                   ],
                 ),

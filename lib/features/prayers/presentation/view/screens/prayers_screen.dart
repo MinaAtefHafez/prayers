@@ -146,7 +146,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.symmetric(
-                                      vertical: 13.h, horizontal: 30.w),
+                                      vertical: 13.h, horizontal: 20.w),
                                   child: TodayItem(
                                       prayerToday:
                                           prayersCubit.prayerToday!.date!,

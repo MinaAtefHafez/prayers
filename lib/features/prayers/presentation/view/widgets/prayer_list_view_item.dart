@@ -63,7 +63,7 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
               child: Container(
                 padding: widget.isPrayerForToday
                     ? widget.prayerState == PrayerState.next
-                        ? EdgeInsets.symmetric(horizontal: 7.w , vertical: 3.h )
+                        ? EdgeInsets.symmetric(horizontal: 7.w, vertical: 3.h)
                         : null
                     : null,
                 decoration: BoxDecoration(
@@ -86,7 +86,7 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
                           ? widget.prayerState == PrayerState.previous
                               ? BoxDecoration(
                                   borderRadius: BorderRadius.circular(40.r),
-                                  color: AppColors.primary.withOpacity(0.2))
+                                  color: AppColors.primary.withOpacity(0.15))
                               : null
                           : null,
                       child: Text(tr(widget.prayer.prayerName!),
@@ -123,7 +123,11 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
                 ),
               ),
             ),
-            40.0.width,
+            if (widget.prayerState == PrayerState.next) ...[
+              32.0.width,
+            ] else ...[
+              40.0.width
+            ],
             const Icon(Icons.mic),
           ],
         ),

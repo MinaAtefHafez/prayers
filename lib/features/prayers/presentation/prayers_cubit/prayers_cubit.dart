@@ -69,7 +69,7 @@ class PrayersCubit extends Cubit<PrayersState> {
         final prayerNowAsString = prayers[index].prayerDate!.split(' ').first;
         final prayerNow = IntlHelper.dateTime(prayerNowAsString);
         final difference = dateTimeNow.difference(prayerNow).inMinutes;
-        if (difference > 0 && difference <= 60) {
+        if (difference > 0 && difference <= 30) {
           prayer = prayers[index];
           break;
         }

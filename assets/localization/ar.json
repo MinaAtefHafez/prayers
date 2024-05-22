@@ -48,7 +48,15 @@
     "Since" : "منذ" ,
     "Min" : "د" ,
     "Gregorian" : "ميلادى"   ,
-    "Kaaba" : "الكعبة"
+    "Kaaba" : "الكعبة" ,
+    "Language" : "اللغة" ,
+    "Notifications" : "الاشعارات" ,
+    "EditNotifications" : "تعديل الاشعارات" ,
+    "ShowPrayers" : "عرض الصلوات" ,
+    "ModifyingApparentPrayers" : "تعديل الصلوات الظاهرة" ,
+    "EditLanguage" : "تعديل الصلوات" ,
+    "ChoosePrayer" : "اختر الصلاة"
+    
     
     
     

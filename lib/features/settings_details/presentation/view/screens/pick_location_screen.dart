@@ -65,12 +65,6 @@ class _PickLocationScreenState extends State<PickLocationScreen> {
                   Text(tr('ClickHere'),
                       style: AppStyles.style23.copyWith(
                           color: Colors.black, fontWeight: FontWeight.w600)),
-                  70.0.height,
-                  SettingsButton(
-                      text: 'Back',
-                      onPressed: () {
-                        context.pop();
-                      }),
                 ],
               ),
             ),

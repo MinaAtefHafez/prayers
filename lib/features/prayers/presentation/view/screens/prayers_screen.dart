@@ -16,6 +16,7 @@ import 'package:prayers/features/prayers/presentation/prayers_cubit/prayers_cubi
 import 'package:prayers/features/prayers/presentation/view/widgets/prayers_list_view.dart';
 import 'package:prayers/features/prayers/presentation/view/widgets/today_item.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
+import 'package:prayers/features/settings_details/presentation/view/screens/settings_screen.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/getting_location_dialog.dart';
 import '../../../../../core/theme/colors/colors.dart';
 import '../widgets/prayer_item.dart';
@@ -63,20 +64,16 @@ class _PrayerScreenState extends State<PrayerScreen> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w),
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
                           child: Row(
                             children: [
-                              Row(
-                                children: [
-                                  Icon(Icons.location_city,
-                                      color: Colors.grey.shade300),
-                                  15.0.width,
-                                  Text(settingsCubit.location!.locationName!,
-                                      style: AppStyles.style20.copyWith(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600)),
-                                ],
-                              ),
+                              Icon(Icons.location_city,
+                                  color: Colors.grey.shade300),
+                              15.0.width,
+                              Text(settingsCubit.location!.locationName!,
+                                  style: AppStyles.style20.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600)),
                               const Spacer(),
                               IconButton(
                                   onPressed: () {
@@ -84,6 +81,16 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   },
                                   icon: Icon(
                                     Icons.location_on_rounded,
+                                    color: Colors.white,
+                                    size: 30.w,
+                                  )),
+                              10.0.width,
+                              IconButton(
+                                  onPressed: () {
+                                    context.pushNamed(SettingsScreen.name);
+                                  },
+                                  icon: Icon(
+                                    Icons.settings,
                                     color: Colors.white,
                                     size: 30.w,
                                   )),

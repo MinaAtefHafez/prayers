@@ -29,7 +29,6 @@ final class GetCurrentLocationFailure extends SettingsState {
 final class GetLocationLoading extends SettingsState {}
 
 final class GetLocationLocalSuccess extends SettingsState {
-
   GetLocationLocalSuccess();
 }
 
@@ -50,3 +49,7 @@ final class ChooseMethod extends SettingsState {}
 final class SaveMethodLocalLoading extends SettingsState {}
 
 final class SaveMethodLocalSuccess extends SettingsState {}
+
+//! Settings
+
+final class ChoosePrayerToEditSettings extends SettingsState {}

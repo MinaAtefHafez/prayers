@@ -6,8 +6,10 @@ abstract class CustomDialog {
       {required Widget widget, double? horizontal, double? vertical}) {
     showDialog(
       context: context,
+      
       builder: (context) => Dialog(
         backgroundColor: Colors.white,
+        
         shape: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.r),
             borderSide: BorderSide.none),

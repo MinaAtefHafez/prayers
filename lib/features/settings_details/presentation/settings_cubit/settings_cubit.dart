@@ -7,6 +7,7 @@ import 'package:prayers/core/exceptions/exceptions.dart';
 import 'package:prayers/core/helpers/location_helper/location_helper.dart';
 import 'package:prayers/features/settings_details/data/models/location_model.dart';
 import 'package:prayers/features/settings_details/data/models/methods_model.dart';
+import 'package:prayers/features/settings_details/data/models/prayer_settings_model.dart';
 import 'package:prayers/features/settings_details/data/repository/settings_repo.dart';
 part 'settings_state.dart';
 
@@ -18,6 +19,32 @@ class SettingsCubit extends Cubit<SettingsState> {
   LocationModel? location;
   MethodsModel? methodsModel;
   Algeria? method;
+
+  //! prayer settings
+
+  PrayerSettingsModel? prayerSettings;
+
+  List<PrayerSettingsModel> prayersSettingsList = [
+    PrayerSettingsModel(
+        prayerName: 'Midnight', isNotify: true, isShow: true, minutes: 15),
+    PrayerSettingsModel(
+        prayerName: 'Fajr', isNotify: true, isShow: true, minutes: 15),
+    PrayerSettingsModel(
+        prayerName: 'Dhuhr', isNotify: true, isShow: true, minutes: 15),
+    PrayerSettingsModel(
+        prayerName: 'Asr', isNotify: true, isShow: true, minutes: 15),
+    PrayerSettingsModel(
+        prayerName: 'Maghrib', isNotify: true, isShow: true, minutes: 15),
+    PrayerSettingsModel(
+        prayerName: 'Isha', isNotify: true, isShow: true, minutes: 15),
+  ];
+
+  String get prayerSettingNow => prayerSettings!.prayerName!;
+
+  void choosePrayerToEditSetting(int index) {
+    prayerSettings = prayersSettingsList[index];
+    emit(ChoosePrayerToEditSettings());
+  }
 
   void changeLanguageRadioValue(int? value) {
     languageRadioValue = value!;

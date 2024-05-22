@@ -47,7 +47,14 @@
    "Since" : "since" ,
    "Min" : "m" ,
    "Gregorian" : "gregorian" ,
-   "Kaaba"  :"kaaba"
+   "Kaaba"  :"kaaba" ,
+   "Language" : "Language" ,
+   "Notifications"  : "Notifications" ,
+   "EditNotifications" : "Edit Notifications"  ,
+   "ShowPrayers" : "Show Prayers" ,
+   "ModifyingApparentPrayers" : "Modifying Apparent Prayers" ,
+   "EditLanguage" : "Edit Language" ,
+   "ChoosePrayer" : "Choose Prayer"
  
 
 }

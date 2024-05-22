@@ -25,40 +25,63 @@ class GregorianListViewItem extends StatelessWidget {
             ),
             child: Text(getDay,
                 style: AppStyles.style20.copyWith(
-                  
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
                 )),
           ),
           Expanded(
-              child: Center(
-            child: Text(gregorianYear.timings!.fajr!.split(' ').first,
-                style: AppStyles.style16.copyWith(
-                    color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
+              child: Container(
+                alignment: Alignment.center,
+                width: 40.w ,
+            child: FittedBox(
+              child: Text(gregorianYear.timings!.fajr!.split(' ').first,
+                  style: AppStyles.style16.copyWith(
+                      color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
+            ),
           )),
           Expanded(
-              child: Center(
-            child: Text(gregorianYear.timings!.dhuhr!.split(' ').first,
-                style: AppStyles.style16.copyWith(
-                    color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
+              child: Container(
+            alignment: Alignment.center,
+            width: 40.w,
+            child: FittedBox(
+              child: Text(gregorianYear.timings!.dhuhr!.split(' ').first,
+                  style: AppStyles.style16.copyWith(
+                      color: Colors.grey.shade500,
+                      fontWeight: FontWeight.w500)),
+            ),
           )),
           Expanded(
-              child: Center(
-            child: Text(gregorianYear.timings!.asr!.split(' ').first,
-                style: AppStyles.style16.copyWith(
-                    color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
+              child: Container(
+            alignment: Alignment.center,
+            width: 40.w,
+            child: FittedBox(
+              child: Text(gregorianYear.timings!.asr!.split(' ').first,
+                  style: AppStyles.style16.copyWith(
+                      color: Colors.grey.shade500,
+                      fontWeight: FontWeight.w500)),
+            ),
           )),
           Expanded(
-              child: Center(
-            child: Text(gregorianYear.timings!.maghrib!.split(' ').first,
-                style: AppStyles.style16.copyWith(
-                    color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
+              child: Container(
+            alignment: Alignment.center,
+            width: 40.w,
+            child: FittedBox(
+              child: Text(gregorianYear.timings!.maghrib!.split(' ').first,
+                  style: AppStyles.style16.copyWith(
+                      color: Colors.grey.shade500,
+                      fontWeight: FontWeight.w500)),
+            ),
           )),
           Expanded(
-              child: Center(
-            child: Text(gregorianYear.timings!.isha!.split(' ').first,
-                style: AppStyles.style16.copyWith(
-                    color: Colors.grey.shade500, fontWeight: FontWeight.w500)),
+              child: Container(
+            alignment: Alignment.center,
+            width: 40.w,
+            child: FittedBox(
+              child: Text(gregorianYear.timings!.isha!.split(' ').first,
+                  style: AppStyles.style16.copyWith(
+                      color: Colors.grey.shade500,
+                      fontWeight: FontWeight.w500)),
+            ),
           )),
         ]));
   }

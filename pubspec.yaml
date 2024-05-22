@@ -49,6 +49,7 @@ dependencies:
   permission_handler: ^11.3.1
   shared_preferences: ^2.2.3
   shimmer: ^3.0.0
+  widget_to_marker: ^1.0.5
 
 dev_dependencies:
   flutter_lints: ^3.0.0

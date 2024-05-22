@@ -1,7 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:prayers/core/dependency_injection/dependency_injection.dart';
+import 'package:prayers/core/extensions/assets_images.dart';
+import 'package:prayers/core/gen/app_images.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
+import 'package:widget_to_marker/widget_to_marker.dart';
 
 class DomeScreen extends StatefulWidget {
   const DomeScreen({super.key});
@@ -33,14 +38,20 @@ class _DomeScreenState extends State<DomeScreen> {
         initialCameraPosition: _initCameraPosition,
         markers: markers,
         polylines: polylines,
-        onMapCreated: (controller) {
+        onMapCreated: (controller) async {
           final userLocationMarker = Marker(
               markerId: MarkerId(settingsCubit.location!.latitude.toString()),
               position: _initCameraPosition.target);
+          final kaabaMarker = await Assets.imagesKaaba
+              .image(width: 200.w, height: 200.h)
+              .toBitmapDescriptor();
+
           final domeMarker = Marker(
               markerId: MarkerId(
                 domeLatLng.latitude.toString(),
               ),
+              infoWindow: InfoWindow(title: tr('Kaaba')),
+              icon: kaabaMarker,
               position: domeLatLng);
           markers.addAll([userLocationMarker, domeMarker]);
           polylines.add(Polyline(

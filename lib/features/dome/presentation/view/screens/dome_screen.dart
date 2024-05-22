@@ -44,7 +44,7 @@ class _DomeScreenState extends State<DomeScreen> {
               position: domeLatLng);
           markers.addAll([userLocationMarker, domeMarker]);
           polylines.add(Polyline(
-            width: 7 ,
+            width: 7,
             polylineId: const PolylineId('dome'),
             color: Colors.black,
             points: [_initCameraPosition.target, domeLatLng],

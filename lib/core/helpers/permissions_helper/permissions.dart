@@ -12,6 +12,8 @@ abstract class PermissionsHelper {
     }
   }
 
-
-
+  static Future<bool> locationPermission() async {
+    final permission = await getPermission(Permission.locationWhenInUse);
+    return permission;
+  }
 }

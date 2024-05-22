@@ -47,7 +47,9 @@
     "December" : "ديسمبر" ,
     "Since" : "منذ" ,
     "Min" : "د" ,
-    "Gregorian" : "ميلادى" 
+    "Gregorian" : "ميلادى"  ,
+    "Map" :  "خريطة" ,
+    "Compass" : "بوصلة"
     
     
 }

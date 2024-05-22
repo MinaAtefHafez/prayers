@@ -73,6 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: const Icon(Icons.alarm), label: tr('Prayers')),
                     BottomNavigationBarItem(
                         icon: const Icon(Icons.mosque), label: tr('Dome')),
+                     BottomNavigationBarItem(
+                        icon: const Icon(Icons.compass_calibration_sharp), label: tr('Compass')),   
                     BottomNavigationBarItem(
                         icon: const Icon(Icons.more_horiz),
                         label: tr('Settings'))

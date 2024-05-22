@@ -1,9 +1,9 @@
 class Assets {
   Assets._();
   
-  /// Assets for imagesPerson
-  /// assets/images/person.json
-  static const String imagesPerson = "assets/images/person.json";
+  /// Assets for imagesCompass
+  /// assets/images/compass.png
+  static const String imagesCompass = "assets/images/compass.png";
 
   /// Assets for imagesPrayer
   /// assets/images/prayer.png

@@ -6,11 +6,10 @@ import 'package:prayers/core/theme/app_styles/app_styles.dart';
 import 'package:prayers/core/theme/colors/colors.dart';
 
 class CustomErrorWidget extends StatelessWidget {
-  const CustomErrorWidget(
-      {super.key, required this.message, required this.onPressed});
+  const CustomErrorWidget({super.key, required this.message, this.onPressed});
 
   final String message;
-  final Function() onPressed;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +28,15 @@ class CustomErrorWidget extends StatelessWidget {
                   style: AppStyles.style18.copyWith(color: Colors.black)),
             ),
             30.0.height,
-            ElevatedButton(
-              onPressed: onPressed,
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
-              child: Text(tr('Reload'),
-                  style: AppStyles.style18.copyWith(color: Colors.white)),
-            ),
+            if (onPressed != null) ...[
+              ElevatedButton(
+                onPressed: onPressed,
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary),
+                child: Text(tr('Reload'),
+                    style: AppStyles.style18.copyWith(color: Colors.white)),
+              ),
+            ]
           ],
         ),
       ),

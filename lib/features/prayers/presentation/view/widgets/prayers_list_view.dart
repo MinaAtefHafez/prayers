@@ -19,7 +19,7 @@ class PrayersListView extends StatelessWidget {
     return ListView.builder(
         itemCount: prayers.length,
         itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(bottom: 15.h ),
+              padding: EdgeInsets.only(bottom: 20.h ),
               child: Builder(builder: (context) {
                 final state = prayerState(prayers[index]);
                 return PrayerListViewItem(

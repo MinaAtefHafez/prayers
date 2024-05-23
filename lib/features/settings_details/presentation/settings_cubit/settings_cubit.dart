@@ -23,6 +23,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   //! prayer settings
 
   PrayerSettingsModel? prayerSettings;
+  int prayerEditIndex = 0;
 
   List<PrayerSettingsModel> prayersSettingsList = [
     PrayerSettingsModel(
@@ -44,6 +45,10 @@ class SettingsCubit extends Cubit<SettingsState> {
   void choosePrayerToEditSetting(int index) {
     prayerSettings = prayersSettingsList[index];
     emit(ChoosePrayerToEditSettings());
+  }
+
+  void recievePrayerEditIndex(int index) {
+    prayerEditIndex = index;
   }
 
   void changeLanguageRadioValue(int? value) {

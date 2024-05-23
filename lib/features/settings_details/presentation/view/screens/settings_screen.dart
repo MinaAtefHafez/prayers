@@ -27,16 +27,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final settingsCubit = di<SettingsCubit>();
 
   final settingsItems = [
+    SettingsItemModel(title: 'Language', subTitle: 'EditLanguage'),
     SettingsItemModel(
-        title: 'Language', subTitle: 'EditLanguage', iconData: Icons.language),
+        title: 'ShowPrayers', subTitle: 'ModifyingApparentPrayers'),
+    SettingsItemModel(title: 'Method', subTitle: 'MethodWay'),
     SettingsItemModel(
-        title: 'Notifications',
-        subTitle: 'EditNotifications',
-        iconData: Icons.notifications_active),
-    SettingsItemModel(
-        title: 'ShowPrayers',
-        subTitle: 'ModifyingApparentPrayers',
-        iconData: Icons.list),
+        title: 'PrayersSettings', subTitle: 'PrayerSettingsEdititing'),
+    SettingsItemModel(title: 'Location', subTitle: 'LocationSettings'),
   ];
 
   final prayers = [
@@ -82,11 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           settingsItemModel: settingsItems[0])),
                   15.0.height,
                   InkWell(
-                      onTap: () {
-                        prayerSettingsDialog(context,
-                            prayers: prayers,
-                            onTap: settingsCubit.choosePrayerToEditSetting);
-                      },
+                      onTap: () {},
                       child: SettingsListTile(
                           settingsItemModel: settingsItems[1])),
                   15.0.height,
@@ -94,6 +87,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onTap: () {},
                       child: SettingsListTile(
                           settingsItemModel: settingsItems[2])),
+                  15.0.height,
+                  InkWell(
+                      onTap: () {
+                        prayerSettingsDialog(context, prayers: prayers,
+                            onTap: (index) {
+                          settingsCubit.recievePrayerEditIndex(index);
+                          settingsCubit.choosePrayerToEditSetting(index);
+                        });
+                      },
+                      child: SettingsListTile(
+                          settingsItemModel: settingsItems[3])),
+                  InkWell(
+                      onTap: () {},
+                      child: SettingsListTile(
+                          settingsItemModel: settingsItems[4])),
+                  20.0.height,
+                  Divider(
+                    color: Colors.grey.shade300,
+                    thickness: 15.h,
+                  ),
                 ],
               )),
         ),

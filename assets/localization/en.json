@@ -11,7 +11,7 @@
    "Longitude" : "Longitude" ,
    "GetLocation" : "Getting the location ..." ,
    "MethodWay" : "Set the calculation method ..." ,
-   "Method" : "choose calculation method" ,
+   "Method" : "calculation method" ,
    "Fajr"  : "fajr" ,
    "Sunrise" : "sunrise" ,
    "Dhuhr" : "dhuhr" ,
@@ -54,7 +54,11 @@
    "ShowPrayers" : "Show Prayers" ,
    "ModifyingApparentPrayers" : "Modifying Apparent Prayers" ,
    "EditLanguage" : "Edit Language" ,
-   "ChoosePrayer" : "Choose Prayer"
+   "ChoosePrayer" : "Choose Prayer" ,
+   "PrayersSettings" : "Prayers Settings" ,
+   "PrayerSettingsEdititing" : "Prayer Settings Edititing" ,
+   "Location" : "Location" ,
+    "LocationSettings" : "Location Settings"
  
 
 }

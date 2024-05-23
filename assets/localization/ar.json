@@ -12,7 +12,7 @@
    "Longitude" : "خط الطول"  ,
    "GetLocation" :  "جار الحصول على الموقع ..." ,
    "MethodWay" :  "ضبط طريقة الحساب" ,
-   "Method" : "اختر طريقة الحساب" ,
+   "Method" : "طريقة الحساب" ,
    "Fajr" : "الفجر" ,
    "Sunrise" : "الشروق" ,
    "Dhuhr" : "الظهر" ,
@@ -52,10 +52,16 @@
     "Language" : "اللغة" ,
     "Notifications" : "الاشعارات" ,
     "EditNotifications" : "تعديل الاشعارات" ,
-    "ShowPrayers" : "عرض الصلوات" ,
+    "ShowPrayers" : "اظهار الصلوات" ,
+    "ChoosePrayersShow" : "حدد الصلوات التى تريد عرضها" ,
     "ModifyingApparentPrayers" : "تعديل الصلوات الظاهرة" ,
-    "EditLanguage" : "تعديل الصلوات" ,
-    "ChoosePrayer" : "اختر الصلاة"
+    "EditLanguage" : "تعديل اللغة" ,
+    "ChoosePrayer" : "اختر الصلاة"  ,
+    "PrayersSettings" : "اعدادات الصلوات" ,
+    "PrayerSettingsEdititing" : "تعديل اعدادات الصلوات" ,
+    "Location" : "الموقع" ,
+    "LocationSettings" : "اعدادات الموقع"
+    
     
     
     

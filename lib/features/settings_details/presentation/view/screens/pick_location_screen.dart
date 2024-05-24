@@ -12,7 +12,6 @@ import 'package:prayers/features/settings_details/presentation/view/screens/meth
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/getting_location_dialog.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/gps_button.dart';
-import 'package:prayers/features/settings_details/presentation/view/widgets/settings_button.dart';
 
 class PickLocationScreen extends StatefulWidget {
   const PickLocationScreen({super.key});
@@ -33,6 +32,7 @@ class _PickLocationScreenState extends State<PickLocationScreen> {
       child: BlocListener<SettingsCubit, SettingsState>(
         listener: (context, state) {
           if (state is GetCurrentLocationFailure) {
+            context.pop();
             showSnackBar(context, message: state.errMessage);
           }
 

@@ -1,15 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prayers/core/dependency_injection/dependency_injection.dart';
 import 'package:prayers/core/extensions/distance_extention.dart';
 import 'package:prayers/core/extensions/navigator_extension.dart';
-import 'package:prayers/features/settings_details/data/models/settings_item_model.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
+import 'package:prayers/features/settings_details/presentation/view/screens/settings_show_prayers_screen.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/settings_list_tile.dart';
-
+import 'package:prayers/features/settings_details/presentation/view/widgets/settings_ui_lists.dart';
 import '../widgets/change_language_dialog.dart';
 import '../widgets/prayer_settings_dialog.dart';
 import 'preyer_settings_screen.dart';
@@ -26,24 +25,9 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final settingsCubit = di<SettingsCubit>();
 
-  final settingsItems = [
-    SettingsItemModel(title: 'Language', subTitle: 'EditLanguage'),
-    SettingsItemModel(
-        title: 'ShowPrayers', subTitle: 'ModifyingApparentPrayers'),
-    SettingsItemModel(title: 'Method', subTitle: 'MethodWay'),
-    SettingsItemModel(
-        title: 'PrayersSettings', subTitle: 'PrayerSettingsEdititing'),
-    SettingsItemModel(title: 'Location', subTitle: 'LocationSettings'),
-  ];
+  final settingsItems = SettingsUiLists.settingsItemsModel;
 
-  final prayers = [
-    'Midnight',
-    'Fajr',
-    'Dhuhr',
-    'Asr',
-    'Maghrib',
-    'Isha',
-  ];
+  final prayers = SettingsUiLists.prayersNames;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +63,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           settingsItemModel: settingsItems[0])),
                   15.0.height,
                   InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        context.pushNamed(SettingsShowPrayersScreen.name);
+                      },
                       child: SettingsListTile(
                           settingsItemModel: settingsItems[1])),
                   15.0.height,

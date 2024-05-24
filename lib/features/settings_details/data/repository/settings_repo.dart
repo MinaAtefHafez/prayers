@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:prayers/core/exceptions/failures.dart';
 import 'package:prayers/core/helpers/api_helper/api_consumer.dart';
 import 'package:prayers/core/helpers/api_helper/end_points.dart';
+import 'package:prayers/core/helpers/hive_helper/hive_helper.dart';
 import 'package:prayers/core/helpers/shared_preference/local_storage_keys.dart';
 import 'package:prayers/core/helpers/shared_preference/shared_preference.dart';
 import 'package:prayers/features/settings_details/data/models/location_model.dart';
@@ -16,6 +17,8 @@ abstract class SettingsRepo {
   Future<void> saveMethod(String method);
   Future<Algeria> getMothodLocal();
   Future<LocationModel> getLocationLocal();
+  Future<void> savePrayersSettingsLocal(List<dynamic> data);
+  Future<List<dynamic>?> getPrayersSettingsLocal();
 }
 
 class SettingsRepoImpl implements SettingsRepo {
@@ -55,4 +58,18 @@ class SettingsRepoImpl implements SettingsRepo {
     final data = SharedPref.getValue(LocalStorageKeys.location) as String;
     return Future.value(LocationModel.fromJson(jsonDecode(data)));
   }
+
+  //! settings
+
+  @override
+  Future<void> savePrayersSettingsLocal(List<dynamic> data) async {
+    await HiveHelper.putData<List<dynamic>>(
+        key: HiveConstants.settings, value: data);
+  }
+  
+  @override
+  Future<List<dynamic>?> getPrayersSettingsLocal() async {
+   final data = await HiveHelper.getData(key: HiveConstants.settings) as List<dynamic>?  ;
+   return data ;
+   }
 }

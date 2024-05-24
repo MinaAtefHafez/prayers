@@ -20,7 +20,7 @@ class _PrayerSettingsState extends State<PrayerSettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(tr(settingsCubit.prayerSettingNow)),
+        title: Text(tr(settingsCubit.prayerSettingName)),
         toolbarHeight: 80.h,
       ),
     );

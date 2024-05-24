@@ -1,15 +1,15 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:prayers/app.dart';
 import 'package:prayers/core/dependency_injection/dependency_injection.dart';
+import 'package:prayers/core/helpers/hive_helper/hive_helper.dart';
 import 'package:prayers/core/helpers/shared_preference/shared_preference.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await Future.wait([setUpLocator(), SharedPref.init()]);
+  await Future.wait([setUpLocator(), SharedPref.init(), HiveHelper.init()]);
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

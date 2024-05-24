@@ -1,8 +1,16 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+
+
+import 'package:hive/hive.dart';
+part 'prayer_settings_model.g.dart';
+@HiveType(typeId: 0)
 class PrayerSettingsModel {
+  @HiveField(0)
   String? prayerName;
+  @HiveField(1)
   bool? isShow;
+  @HiveField(2)
   int? minutes;
+  @HiveField(3)
   bool? isNotify;
 
   PrayerSettingsModel(

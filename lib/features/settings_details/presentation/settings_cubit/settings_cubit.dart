@@ -7,7 +7,7 @@ import 'package:prayers/core/exceptions/exceptions.dart';
 import 'package:prayers/core/helpers/location_helper/location_helper.dart';
 import 'package:prayers/features/settings_details/data/models/location_model.dart';
 import 'package:prayers/features/settings_details/data/models/methods_model.dart';
-import 'package:prayers/features/settings_details/data/models/prayer_settings_model.dart';
+import 'package:prayers/features/settings_details/data/models/prayer_settings_model/prayer_settings_model.dart';
 import 'package:prayers/features/settings_details/data/repository/settings_repo.dart';
 part 'settings_state.dart';
 
@@ -25,7 +25,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   PrayerSettingsModel? prayerSettings;
   int prayerEditIndex = 0;
 
-  List<PrayerSettingsModel> prayersSettingsList = [
+  List<dynamic> prayersSettingsList = [
     PrayerSettingsModel(
         prayerName: 'Midnight', isNotify: true, isShow: true, minutes: 15),
     PrayerSettingsModel(
@@ -40,7 +40,23 @@ class SettingsCubit extends Cubit<SettingsState> {
         prayerName: 'Isha', isNotify: true, isShow: true, minutes: 15),
   ];
 
-  String get prayerSettingNow => prayerSettings!.prayerName!;
+  String get prayerSettingName => prayerSettings!.prayerName!;
+
+  bool prayerSettingsIsShow(int index) => prayersSettingsList[index].isShow;
+
+  Future<void> savePrayersSettingsLocal() async {
+    await _settingsRepo.savePrayersSettingsLocal(prayersSettingsList);
+    emit(SavePrayersSettingsLocal());
+  }
+
+  Future<void> getPrayersSettingsLocal() async {
+    emit(GetPrayersSettingsLocalLoading());
+    final result = await _settingsRepo.getPrayersSettingsLocal();
+    if (result != null) {
+      prayersSettingsList = result;
+    }
+    emit(GetPrayersSettingsLocal());
+  }
 
   void choosePrayerToEditSetting(int index) {
     prayerSettings = prayersSettingsList[index];
@@ -50,6 +66,14 @@ class SettingsCubit extends Cubit<SettingsState> {
   void recievePrayerEditIndex(int index) {
     prayerEditIndex = index;
   }
+
+  void changePrayerShow(int index, {required bool value}) {
+    prayersSettingsList[index] =
+        prayersSettingsList[index].copyWith(isShow: value);
+    emit(ChangePrayerShow());
+  }
+
+  //! language
 
   void changeLanguageRadioValue(int? value) {
     languageRadioValue = value!;

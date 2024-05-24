@@ -16,12 +16,6 @@ void changeLanguageDialog(BuildContext context,
         children: [
           Text(tr('ChooseLanguage'),
               style: AppStyles.style25.copyWith(color: Colors.black)),
-          30.0.height,
-          Divider(
-            color: Colors.grey.shade500,
-            height: 0,
-            thickness: 0.5,
-          ),
           40.0.height,
           LanguageItem(
               value: 0,

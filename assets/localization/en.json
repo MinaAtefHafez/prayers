@@ -10,7 +10,7 @@
    "Latitude" : "Latitude" ,
    "Longitude" : "Longitude" ,
    "GetLocation" : "Getting the location ..." ,
-   "MethodWay" : "Set the calculation method ..." ,
+   "MethodWay" : "Set the calculation method" ,
    "Method" : "calculation method" ,
    "Fajr"  : "fajr" ,
    "Sunrise" : "sunrise" ,
@@ -58,7 +58,8 @@
    "PrayersSettings" : "Prayers Settings" ,
    "PrayerSettingsEdititing" : "Prayer Settings Edititing" ,
    "Location" : "Location" ,
-    "LocationSettings" : "Location Settings"
+    "LocationSettings" : "Location Settings" ,
+    "Save" : "save"
  
 
 }

@@ -53,3 +53,11 @@ final class SaveMethodLocalSuccess extends SettingsState {}
 //! Settings
 
 final class ChoosePrayerToEditSettings extends SettingsState {}
+
+final class ChangePrayerShow extends SettingsState {}
+
+final class SavePrayersSettingsLocal extends SettingsState {}
+
+final class GetPrayersSettingsLocalLoading extends SettingsState {}
+
+final class GetPrayersSettingsLocal extends SettingsState {}

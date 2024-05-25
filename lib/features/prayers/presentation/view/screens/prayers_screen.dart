@@ -55,7 +55,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
           }
         }, child: BlocBuilder<PrayersCubit, PrayersState>(
           builder: (context, state) {
-            if (prayersCubit.prayerTodayAfterFilterAccordingSettings != null) {
+            if (settingsCubit.location != null) {
               return Stack(
                 children: [
                   Container(color: AppColors.primary),
@@ -166,13 +166,13 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   color: Colors.grey.withOpacity(0.7),
                                   thickness: 0.5,
                                   height: 0,
-                                ), 
+                                ),
                                 Expanded(
                                     child: PrayersListView(
                                         prayerState:
                                             prayersCubit.getPrayerState,
                                         prayers: prayersCubit
-                                            .prayerToday!.timings!.prayers)),
+                                            .prayerTodayAfterFilterAccordingSettings)),
                               ],
                             ),
                           ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model_param.dart';
@@ -22,7 +21,7 @@ class PrayersCubit extends Cubit<PrayersState> {
   final SettingsRepo _settingsRepo;
   CalendarMonthModel? calendarMonthModel;
   Datum? prayerToday;
-  Datum? prayerTodayAfterFilterAccordingSettings;
+  List<PrayerModel> prayerTodayAfterFilterAccordingSettings = List.empty();
   PrayerModel? previousPrayer;
   PrayerModel? nextPrayer;
   String? yearNowLocal;
@@ -69,13 +68,14 @@ class PrayersCubit extends Cubit<PrayersState> {
     emit(GetPrayerToday());
   }
 
-  Future<Datum> filterPrayersAccordingSettings({required Datum prayer}) async {
+  Future<List<PrayerModel>> filterPrayersAccordingSettings(
+      {required Datum prayer}) async {
     final Map<dynamic, dynamic>? settings = _settingsRepo.settingsMap;
-    Datum prayerFilter = prayer;
-    if (_settingsRepo.settingsMap == null) return prayerFilter;
-    prayerFilter.timings!.prayers
-        .removeWhere((element) => !settings![element.prayerName].isShow);
-    return prayerFilter;
+    List<PrayerModel> filterList =
+        List.from(prayer.timings!.prayers.map((e) => e));
+    if (_settingsRepo.settingsMap == null) return filterList;
+    filterList.removeWhere((element) => !settings![element.prayerName].isShow);
+    return filterList;
   }
 
   Future<void> filterPrayersToday() async {
@@ -151,16 +151,15 @@ class PrayersCubit extends Cubit<PrayersState> {
   }
 
   Future<void> getPreviousPrayerForToday() async {
-    previousPrayer = await getPreviousPrayer(
-        prayerTodayAfterFilterAccordingSettings!.timings!.prayers);
+    previousPrayer =
+        await getPreviousPrayer(prayerTodayAfterFilterAccordingSettings!);
     previousPrayer = previousPrayer?.copyWith(
         differnece: differenceBetweenTimeNowAndPreviousPrayer);
     emit(GetPrayer());
   }
 
   Future<void> getNextPrayerForToday() async {
-    nextPrayer = await getNextPrayer(
-        prayerTodayAfterFilterAccordingSettings!.timings!.prayers);
+    nextPrayer = await getNextPrayer(prayerTodayAfterFilterAccordingSettings!);
     nextPrayer =
         nextPrayer?.copyWith(differnece: differenceBetweenNextPrayerAndTimeNow);
     emit(GetPrayer());

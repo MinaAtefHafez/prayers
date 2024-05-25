@@ -152,14 +152,14 @@ class PrayersCubit extends Cubit<PrayersState> {
 
   Future<void> getPreviousPrayerForToday() async {
     previousPrayer =
-        await getPreviousPrayer(prayerTodayAfterFilterAccordingSettings!);
+        await getPreviousPrayer(prayerTodayAfterFilterAccordingSettings);
     previousPrayer = previousPrayer?.copyWith(
         differnece: differenceBetweenTimeNowAndPreviousPrayer);
     emit(GetPrayer());
   }
 
   Future<void> getNextPrayerForToday() async {
-    nextPrayer = await getNextPrayer(prayerTodayAfterFilterAccordingSettings!);
+    nextPrayer = await getNextPrayer(prayerTodayAfterFilterAccordingSettings);
     nextPrayer =
         nextPrayer?.copyWith(differnece: differenceBetweenNextPrayerAndTimeNow);
     emit(GetPrayer());

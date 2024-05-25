@@ -24,9 +24,9 @@ class CalendarMonthModel {
 
 class Datum {
   Datum({
-    required this.timings,
-    required this.date,
-    required this.meta,
+    this.timings,
+    this.date,
+    this.meta,
   });
 
   final Timings? timings;
@@ -365,6 +365,7 @@ class Timings {
   final String? lastthird;
 
   late List<PrayerModel> prayers;
+  late List<PrayerModel> prayersThatRemovedFromPrayersList;
 
   factory Timings.fromJson(Map<String, dynamic> json) {
     return Timings(

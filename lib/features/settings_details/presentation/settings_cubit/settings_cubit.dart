@@ -16,6 +16,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   int languageRadioValue = 0;
   final SettingsRepo _settingsRepo;
+
   LocationModel? location;
   MethodsModel? methodsModel;
   Algeria? method;
@@ -23,29 +24,41 @@ class SettingsCubit extends Cubit<SettingsState> {
   //! prayer settings
 
   PrayerSettingsModel? prayerSettings;
-  int prayerEditIndex = 0;
 
-  List<dynamic> prayersSettingsList = [
-    PrayerSettingsModel(
+  Map<dynamic, dynamic> prayersSettingsMap = {
+    'Midnight': PrayerSettingsModel(
         prayerName: 'Midnight', isNotify: true, isShow: true, minutes: 15),
-    PrayerSettingsModel(
+    'Imsak': PrayerSettingsModel(
+        prayerName: 'Imsak', isNotify: true, isShow: true, minutes: 15),
+    'Sunrise': PrayerSettingsModel(
+        prayerName: 'Midnight', isNotify: true, isShow: true, minutes: 15),
+    'Fajr': PrayerSettingsModel(
         prayerName: 'Fajr', isNotify: true, isShow: true, minutes: 15),
-    PrayerSettingsModel(
+    'Dhuhr': PrayerSettingsModel(
         prayerName: 'Dhuhr', isNotify: true, isShow: true, minutes: 15),
-    PrayerSettingsModel(
+    'Asr': PrayerSettingsModel(
         prayerName: 'Asr', isNotify: true, isShow: true, minutes: 15),
-    PrayerSettingsModel(
+    'Maghrib': PrayerSettingsModel(
         prayerName: 'Maghrib', isNotify: true, isShow: true, minutes: 15),
-    PrayerSettingsModel(
+    'Isha': PrayerSettingsModel(
         prayerName: 'Isha', isNotify: true, isShow: true, minutes: 15),
-  ];
+  };
+
+  Map<dynamic, dynamic> get getSettingsMap => prayersSettingsMap;
+
+  bool settingsPrayerIsShow(String prayerName) =>
+      prayersSettingsMap[prayerName]!.isShow!;
+
+  void changeSettingsIsShow(String prayerName, {required bool value}) {
+    prayersSettingsMap[prayerName] =
+        prayersSettingsMap[prayerName]!.copyWith(isShow: value);
+    emit(ChangePrayerShow());
+  }
 
   String get prayerSettingName => prayerSettings!.prayerName!;
 
-  bool prayerSettingsIsShow(int index) => prayersSettingsList[index].isShow;
-
   Future<void> savePrayersSettingsLocal() async {
-    await _settingsRepo.savePrayersSettingsLocal(prayersSettingsList);
+    await _settingsRepo.savePrayersSettingsLocal(prayersSettingsMap);
     emit(SavePrayersSettingsLocal());
   }
 
@@ -53,24 +66,9 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(GetPrayersSettingsLocalLoading());
     final result = await _settingsRepo.getPrayersSettingsLocal();
     if (result != null) {
-      prayersSettingsList = result;
+      prayersSettingsMap = result;
     }
     emit(GetPrayersSettingsLocal());
-  }
-
-  void choosePrayerToEditSetting(int index) {
-    prayerSettings = prayersSettingsList[index];
-    emit(ChoosePrayerToEditSettings());
-  }
-
-  void recievePrayerEditIndex(int index) {
-    prayerEditIndex = index;
-  }
-
-  void changePrayerShow(int index, {required bool value}) {
-    prayersSettingsList[index] =
-        prayersSettingsList[index].copyWith(isShow: value);
-    emit(ChangePrayerShow());
   }
 
   //! language

@@ -12,16 +12,17 @@ import 'package:prayers/features/settings_details/data/models/location_model.dar
 import 'package:prayers/features/settings_details/data/models/methods_model.dart';
 
 abstract class SettingsRepo {
+  late Map<dynamic, dynamic>? settingsMap;
   Future<void> saveLocationDataLocal(String locationData);
   Future<Either<Failure, MethodsModel>> getMethods();
   Future<void> saveMethod(String method);
   Future<Algeria> getMothodLocal();
   Future<LocationModel> getLocationLocal();
-  Future<void> savePrayersSettingsLocal(List<dynamic> data);
-  Future<List<dynamic>?> getPrayersSettingsLocal();
+  Future<void> savePrayersSettingsLocal(Map<dynamic, dynamic> data);
+  Future<Map<dynamic, dynamic>?> getPrayersSettingsLocal();
 }
 
-class SettingsRepoImpl implements SettingsRepo {
+class SettingsRepoImpl extends SettingsRepo {
   final ApiConsumer _apiConsumer;
 
   SettingsRepoImpl(this._apiConsumer);
@@ -62,14 +63,16 @@ class SettingsRepoImpl implements SettingsRepo {
   //! settings
 
   @override
-  Future<void> savePrayersSettingsLocal(List<dynamic> data) async {
-    await HiveHelper.putData<List<dynamic>>(
+  Future<void> savePrayersSettingsLocal(Map<dynamic, dynamic> data) async {
+    await HiveHelper.putData<Map<dynamic, dynamic>>(
         key: HiveConstants.settings, value: data);
   }
-  
+
   @override
-  Future<List<dynamic>?> getPrayersSettingsLocal() async {
-   final data = await HiveHelper.getData(key: HiveConstants.settings) as List<dynamic>?  ;
-   return data ;
-   }
+  Future<Map<dynamic, dynamic>?> getPrayersSettingsLocal() async {
+    final data = await HiveHelper.getData(key: HiveConstants.settings)
+        as Map<dynamic, dynamic>?;
+    super.settingsMap = data;
+    return super.settingsMap;
+  }
 }

@@ -24,3 +24,5 @@ final class GetCalendarMonthLocalSuccess extends PrayersState {}
 final class GetPrayerToday extends PrayersState {}
 
 final class GetPrayer extends PrayersState {}
+
+final class FilterPrayersAccordingSettings extends PrayersState {}

@@ -1,20 +1,28 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model_param.dart';
 import 'package:prayers/features/prayers/data/models/prayer_model.dart';
 import 'package:prayers/features/prayers/data/repository/home_repo.dart';
+import 'package:prayers/features/settings_details/data/repository/settings_repo.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
 import '../../../../core/enum/enum.dart';
 import '../../../../core/helpers/intl_helper/intl_helper.dart';
 part 'prayers_state.dart';
 
 class PrayersCubit extends Cubit<PrayersState> {
-  PrayersCubit(this._homeRepo, this._settingsCubit) : super(PrayersInitial());
+  PrayersCubit(
+    this._homeRepo,
+    this._settingsCubit,
+    this._settingsRepo,
+  ) : super(PrayersInitial());
 
   final HomeRepo _homeRepo;
   final SettingsCubit _settingsCubit;
+  final SettingsRepo _settingsRepo;
   CalendarMonthModel? calendarMonthModel;
   Datum? prayerToday;
+  Datum? prayerTodayAfterFilterAccordingSettings;
   PrayerModel? previousPrayer;
   PrayerModel? nextPrayer;
   String? yearNowLocal;
@@ -59,6 +67,23 @@ class PrayersCubit extends Cubit<PrayersState> {
       }
     }
     emit(GetPrayerToday());
+  }
+
+  Future<Datum> filterPrayersAccordingSettings({required Datum prayer}) async {
+    final Map<dynamic, dynamic>? settings = _settingsRepo.settingsMap;
+    Datum prayerFilter = prayer;
+    if (_settingsRepo.settingsMap == null) return prayerFilter;
+    prayerFilter.timings!.prayers
+        .removeWhere((element) => !settings![element.prayerName].isShow);
+    return prayerFilter;
+  }
+
+  Future<void> filterPrayersToday() async {
+    prayerTodayAfterFilterAccordingSettings =
+        await filterPrayersAccordingSettings(
+      prayer: prayerToday!,
+    );
+    emit(FilterPrayersAccordingSettings());
   }
 
   Future<PrayerModel?> getPreviousPrayer(List<PrayerModel> prayers) async {
@@ -126,14 +151,16 @@ class PrayersCubit extends Cubit<PrayersState> {
   }
 
   Future<void> getPreviousPrayerForToday() async {
-    previousPrayer = await getPreviousPrayer(prayerToday!.timings!.prayers);
+    previousPrayer = await getPreviousPrayer(
+        prayerTodayAfterFilterAccordingSettings!.timings!.prayers);
     previousPrayer = previousPrayer?.copyWith(
         differnece: differenceBetweenTimeNowAndPreviousPrayer);
     emit(GetPrayer());
   }
 
   Future<void> getNextPrayerForToday() async {
-    nextPrayer = await getNextPrayer(prayerToday!.timings!.prayers);
+    nextPrayer = await getNextPrayer(
+        prayerTodayAfterFilterAccordingSettings!.timings!.prayers);
     nextPrayer =
         nextPrayer?.copyWith(differnece: differenceBetweenNextPrayerAndTimeNow);
     emit(GetPrayer());
@@ -163,7 +190,6 @@ class PrayersCubit extends Cubit<PrayersState> {
     }
   }
 
-
   Future<void> saveYearNowLocal() async {
     await _homeRepo.saveYearNowLocal();
   }
@@ -176,9 +202,9 @@ class PrayersCubit extends Cubit<PrayersState> {
   Future<void> callCalendarApiOrLocal() async {
     final yearNow = IntlHelper.yearNow;
     if (yearNow == yearNowLocal) {
-     await getCalendarMonthYearLocal();
+      await getCalendarMonthYearLocal();
     } else {
-     await getCalendarMonth();
+      await getCalendarMonth();
     }
   }
 }

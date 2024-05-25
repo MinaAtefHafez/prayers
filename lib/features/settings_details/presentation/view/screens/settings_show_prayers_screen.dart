@@ -2,10 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:prayers/core/extensions/distance_extention.dart';
 import 'package:prayers/core/extensions/navigator_extension.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
-import 'package:prayers/core/theme/colors/colors.dart';
-import 'package:prayers/core/widgets/custom_indicator.dart';
+import 'package:prayers/features/prayers/presentation/prayers_cubit/prayers_cubit.dart';
+import 'package:prayers/features/settings_details/presentation/view/widgets/settings_show_prayer_item.dart';
 import '../../../../../core/dependency_injection/dependency_injection.dart';
 import '../../settings_cubit/settings_cubit.dart';
 import '../widgets/settings_ui_lists.dart';
@@ -22,33 +23,32 @@ class SettingsShowPrayersScreen extends StatefulWidget {
 
 class _SettingsShowPrayersScreenState extends State<SettingsShowPrayersScreen> {
   final settingsCubit = di<SettingsCubit>();
-
+  final prayersCubit = di<PrayersCubit>();
   final prayers = SettingsUiLists.prayersNames;
 
   @override
   void initState() {
     super.initState();
-    settingsCubit.getPrayersSettingsLocal();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: settingsCubit,
-      child: BlocListener<SettingsCubit, SettingsState>(
-        listener: (context, state) {
-          if (state is SavePrayersSettingsLocal) {
-            context.pop();
-          }
-        },
+      value: prayersCubit,
+      child: BlocProvider.value(
+        value: settingsCubit,
         child: Scaffold(
             appBar: AppBar(
               toolbarHeight: 80.h,
               title: Text(tr('ShowPrayers')),
               actions: [
                 TextButton(
-                    onPressed: () {
-                      settingsCubit.savePrayersSettingsLocal();
+                    onPressed: () async {
+                      await settingsCubit.savePrayersSettingsLocal();
+                      await settingsCubit.getPrayersSettingsLocal();
+                      prayersCubit.filterPrayersToday().then((value) {
+                        context.pop();
+                      });
                     },
                     child: Text(
                       tr('Save'),
@@ -58,32 +58,70 @@ class _SettingsShowPrayersScreenState extends State<SettingsShowPrayersScreen> {
             ),
             body: BlocBuilder<SettingsCubit, SettingsState>(
                 builder: (context, state) {
-              if (state is GetPrayersSettingsLocalLoading) {
-                return const CustomIndicator();
-              } else {
-                return ListView.builder(
-                  itemCount: prayers.length,
-                  itemBuilder: (context, index) => Padding(
-                    padding:
-                        EdgeInsets.only(top: 20.h, right: 20.w, left: 20.w),
-                    child: Row(
-                      children: [
-                        Text(tr(prayers[index]),
-                            style: AppStyles.style20.copyWith(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500)),
-                        const Spacer(),
-                        Checkbox(
-                          value: settingsCubit.prayerSettingsIsShow(index),
-                          activeColor: AppColors.primary,
-                          onChanged: (value) => settingsCubit
-                              .changePrayerShow(index, value: value!),
-                        ),
-                      ],
-                    ),
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(20.w),
+                  child: Column(
+                    children: [
+                      SettingsShowPrayerItem(
+                        prayerName: 'Midnight',
+                        value: settingsCubit.settingsPrayerIsShow('Midnight'),
+                        onChanged: (value) => settingsCubit
+                            .changeSettingsIsShow('Midnight', value: value!),
+                      ),
+                      20.0.height,
+                      SettingsShowPrayerItem(
+                        prayerName: 'Imsak',
+                        value: settingsCubit.settingsPrayerIsShow('Imsak'),
+                        onChanged: (value) => settingsCubit
+                            .changeSettingsIsShow('Imsak', value: value!),
+                      ),
+                      20.0.height,
+                      SettingsShowPrayerItem(
+                        prayerName: 'Fajr',
+                        value: settingsCubit.settingsPrayerIsShow('Fajr'),
+                        onChanged: (value) => settingsCubit
+                            .changeSettingsIsShow('Fajr', value: value!),
+                      ),
+                      20.0.height,
+                      SettingsShowPrayerItem(
+                        prayerName: 'Sunrise',
+                        value: settingsCubit.settingsPrayerIsShow('Sunrise'),
+                        onChanged: (value) => settingsCubit
+                            .changeSettingsIsShow('Sunrise', value: value!),
+                      ),
+                      20.0.height,
+                      SettingsShowPrayerItem(
+                        prayerName: 'Dhuhr',
+                        value: settingsCubit.settingsPrayerIsShow('Dhuhr'),
+                        onChanged: (value) => settingsCubit
+                            .changeSettingsIsShow('Dhuhr', value: value!),
+                      ),
+                      20.0.height,
+                      SettingsShowPrayerItem(
+                        prayerName: 'Asr',
+                        value: settingsCubit.settingsPrayerIsShow('Asr'),
+                        onChanged: (value) => settingsCubit
+                            .changeSettingsIsShow('Asr', value: value!),
+                      ),
+                      20.0.height,
+                      SettingsShowPrayerItem(
+                        prayerName: 'Maghrib',
+                        value: settingsCubit.settingsPrayerIsShow('Maghrib'),
+                        onChanged: (value) => settingsCubit
+                            .changeSettingsIsShow('Maghrib', value: value!),
+                      ),
+                      20.0.height,
+                      SettingsShowPrayerItem(
+                        prayerName: 'Isha',
+                        value: settingsCubit.settingsPrayerIsShow('Isha'),
+                        onChanged: (value) => settingsCubit
+                            .changeSettingsIsShow('Isha', value: value!),
+                      ),
+                    ],
                   ),
-                );
-              }
+                ),
+              );
             })),
       ),
     );

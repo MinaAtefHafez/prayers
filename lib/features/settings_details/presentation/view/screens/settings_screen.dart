@@ -10,7 +10,6 @@ import 'package:prayers/features/settings_details/presentation/view/screens/sett
 import 'package:prayers/features/settings_details/presentation/view/widgets/settings_list_tile.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/settings_ui_lists.dart';
 import '../widgets/change_language_dialog.dart';
-import '../widgets/prayer_settings_dialog.dart';
 import 'preyer_settings_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -76,11 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   15.0.height,
                   InkWell(
                       onTap: () {
-                        prayerSettingsDialog(context, prayers: prayers,
-                            onTap: (index) {
-                          settingsCubit.recievePrayerEditIndex(index);
-                          settingsCubit.choosePrayerToEditSetting(index);
-                        });
+                        
                       },
                       child: SettingsListTile(
                           settingsItemModel: settingsItems[3])),

@@ -21,7 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final settingsCubit = di<SettingsCubit>();
   final prayersCubit = di<PrayersCubit>();
   final homeCubit = di<HomeCubit>();
-  late Timer timer;
+  late Timer timer30;
+  late Timer timer2;
   @override
   void initState() {
     super.initState();
@@ -35,11 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
       prayersCubit.getYearNowLocal()
     ]);
     await prayersCubit.callCalendarApiOrLocal();
+    await settingsCubit.getPrayersSettingsLocal();
     await prayersCubit.getPrayers();
+    await prayersCubit.filterPrayersToday();
     await prayersCubit.getPreviousPrayerForToday();
     await prayersCubit.getNextPrayerForToday();
-    timer = Timer.periodic(const Duration(seconds: 30), (timer) async {
+
+    timer30 = Timer.periodic(const Duration(minutes: 1), (timer) async {
       await prayersCubit.getPrayers();
+      await prayersCubit.filterPrayersToday();
+    });
+
+    timer2 = Timer.periodic(const Duration(seconds: 5), (timer) async {
       await prayersCubit.getPreviousPrayerForToday();
       await prayersCubit.getNextPrayerForToday();
     });
@@ -47,7 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    timer.cancel();
+    timer30.cancel();
+    timer2.cancel();
     super.dispose();
   }
 

@@ -9,11 +9,11 @@ class PrayersListView extends StatelessWidget {
       {super.key,
       required this.prayers,
       required this.prayerState,
-      required this.isPrayersForToday});
+      });
 
   final List<PrayerModel> prayers;
   final PrayerState Function(PrayerModel prayer) prayerState;
-  final bool isPrayersForToday;
+ 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -23,7 +23,7 @@ class PrayersListView extends StatelessWidget {
               child: Builder(builder: (context) {
                 final state = prayerState(prayers[index]);
                 return PrayerListViewItem(
-                  isPrayerForToday: isPrayersForToday,
+                  
                   prayerState: state,
                   index: index,
                   prayer: prayers[index],

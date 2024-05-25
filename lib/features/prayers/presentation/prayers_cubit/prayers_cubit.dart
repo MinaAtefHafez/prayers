@@ -163,12 +163,6 @@ class PrayersCubit extends Cubit<PrayersState> {
     }
   }
 
-  bool get isPrayersForToday {
-    final day = IntlHelper.dayNow;
-    final dayRefactor = day.length == 1 ? '0$day' : day;
-    final prayer = prayerToday?.date?.gregorian?.day;
-    return prayer == dayRefactor;
-  }
 
   Future<void> saveYearNowLocal() async {
     await _homeRepo.saveYearNowLocal();

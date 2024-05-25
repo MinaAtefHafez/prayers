@@ -14,13 +14,13 @@ class PrayerListViewItem extends StatefulWidget {
     required this.index,
     required this.prayer,
     required this.prayerState,
-    required this.isPrayerForToday,
+    
   });
 
   final int index;
   final PrayerModel prayer;
   final PrayerState prayerState;
-  final bool isPrayerForToday;
+  
   @override
   State<PrayerListViewItem> createState() => _PrayerListViewItemState();
 }
@@ -61,64 +61,64 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
           children: [
             Expanded(
               child: Container(
-                padding: widget.isPrayerForToday
-                    ? widget.prayerState == PrayerState.next
+                padding: 
+                     widget.prayerState == PrayerState.next
                         ? EdgeInsets.symmetric(horizontal: 7.w, vertical: 3.h)
                         : null
-                    : null,
+                    ,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40.r),
-                    border: widget.isPrayerForToday
-                        ? widget.prayerState == PrayerState.next
+                    border: 
+                         widget.prayerState == PrayerState.next
                             ? Border.all(color: AppColors.primary, width: 2)
                             : null
-                        : null),
+                        ),
                 child: Row(
                   children: [
                     Container(
-                      padding: widget.isPrayerForToday
-                          ? widget.prayerState == PrayerState.previous
+                      padding:
+                           widget.prayerState == PrayerState.previous
                               ? EdgeInsets.symmetric(
                                   vertical: 2.h, horizontal: 10.w)
                               : null
-                          : null,
-                      decoration: widget.isPrayerForToday
-                          ? widget.prayerState == PrayerState.previous
+                          ,
+                      decoration: 
+                          widget.prayerState == PrayerState.previous
                               ? BoxDecoration(
                                   borderRadius: BorderRadius.circular(40.r),
                                   color: AppColors.primary.withOpacity(0.15))
                               : null
-                          : null,
+                          ,
                       child: Text(tr(widget.prayer.prayerName!),
                           style: AppStyles.style20.copyWith(
-                              color: widget.isPrayerForToday
-                                  ? widget.prayerState == PrayerState.next
+                              color: 
+                                   widget.prayerState == PrayerState.next
                                       ? AppColors.primary
                                       : Colors.black
-                                  : Colors.black,
-                              fontWeight: widget.isPrayerForToday
-                                  ? widget.prayerState == PrayerState.next ||
+                                  ,
+                              fontWeight: 
+                                   widget.prayerState == PrayerState.next ||
                                           widget.prayerState ==
                                               PrayerState.previous
                                       ? FontWeight.w700
                                       : FontWeight.w400
-                                  : FontWeight.w400)),
+                                  )),
                     ),
                     const Spacer(),
                     Text(widget.prayer.prayerDate!.split(' ').first,
                         style: AppStyles.style18.copyWith(
-                            fontWeight: widget.isPrayerForToday
-                                ? widget.prayerState == PrayerState.next ||
+                            fontWeight: 
+                                 widget.prayerState == PrayerState.next ||
                                         widget.prayerState ==
                                             PrayerState.previous
                                     ? FontWeight.bold
                                     : FontWeight.w400
-                                : FontWeight.w400,
-                            color: widget.isPrayerForToday
-                                ? widget.prayerState == PrayerState.next
+                                ,
+                            color: 
+                                 widget.prayerState == PrayerState.next
                                     ? AppColors.primary
                                     : Colors.black
-                                : Colors.black)),
+                                )),
                   ],
                 ),
               ),

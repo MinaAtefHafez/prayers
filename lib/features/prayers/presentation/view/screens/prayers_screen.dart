@@ -169,8 +169,6 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                 ),
                                 Expanded(
                                     child: PrayersListView(
-                                        isPrayersForToday:
-                                            prayersCubit.isPrayersForToday,
                                         prayerState:
                                             prayersCubit.getPrayerState,
                                         prayers: prayersCubit
@@ -203,6 +201,8 @@ class _PrayerScreenState extends State<PrayerScreen> {
     final datePick = await CustomDatePicker.datePicker(context);
     if (datePick != null) {
       await prayersCubit.getPrayers(datePick.day.toString());
+      await prayersCubit.getPreviousPrayerForToday();
+      await prayersCubit.getNextPrayerForToday();
     }
   }
 }

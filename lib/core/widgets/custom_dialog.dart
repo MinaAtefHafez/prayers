@@ -3,10 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class CustomDialog {
   static void dialog(BuildContext context,
-      {required Widget widget, double? horizontal, double? vertical}) {
+      {required Widget widget, double? horizontal, double? vertical , 
+      bool? barrierDismissible }) {
     showDialog(
       context: context,
-      
+      barrierDismissible: barrierDismissible ?? false ,
       builder: (context) => Dialog(
         backgroundColor: Colors.white,
         

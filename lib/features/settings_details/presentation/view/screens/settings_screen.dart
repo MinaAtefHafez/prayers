@@ -55,6 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   InkWell(
                       onTap: () {
                         changeLanguageDialog(context,
+                            
                             groupedValue: settingsCubit.languageRadioValue,
                             onChanged: settingsCubit.changeLanguageRadioValue);
                       },

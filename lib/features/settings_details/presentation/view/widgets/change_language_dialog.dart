@@ -11,6 +11,7 @@ void changeLanguageDialog(BuildContext context,
   CustomDialog.dialog(context,
       horizontal: 30.w,
       vertical: 40.h,
+      barrierDismissible: true,
       widget: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

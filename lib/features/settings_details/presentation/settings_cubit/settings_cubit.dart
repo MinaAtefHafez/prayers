@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:location/location.dart';
@@ -134,11 +133,5 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   Future<void> getMothodLocal() async {
     method = await _settingsRepo.getMothodLocal();
-  }
-
-  @override
-  void onChange(Change<SettingsState> change) {
-    log(change.toString());
-    super.onChange(change);
   }
 }

@@ -69,7 +69,9 @@ class _PrayerScreenState extends State<PrayerScreen> {
                           child: Row(
                             children: [
                               Icon(Icons.location_city,
-                                  color: Colors.grey.shade300),
+                                  color: Colors.grey.shade300 ,
+                                   size: 25.w ,
+                                  ),
                               15.0.width,
                               Text(settingsCubit.location!.locationName!,
                                   style: AppStyles.style20.copyWith(
@@ -83,7 +85,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   icon: Icon(
                                     Icons.location_on_rounded,
                                     color: Colors.white,
-                                    size: 30.w,
+                                    size: 25.w,
                                   )),
                               10.0.width,
                               IconButton(
@@ -93,7 +95,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
                                   icon: Icon(
                                     Icons.settings,
                                     color: Colors.white,
-                                    size: 30.w,
+                                    size: 25.w,
                                   )),
                             ],
                           ),
@@ -148,7 +150,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(20.r)),
+                                  top: Radius.circular(15.r)),
                             ),
                             child: Column(
                               children: [

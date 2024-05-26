@@ -14,13 +14,12 @@ class PrayerListViewItem extends StatefulWidget {
     required this.index,
     required this.prayer,
     required this.prayerState,
-    
   });
 
   final int index;
   final PrayerModel prayer;
   final PrayerState prayerState;
-  
+
   @override
   State<PrayerListViewItem> createState() => _PrayerListViewItemState();
 }
@@ -61,64 +60,48 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
           children: [
             Expanded(
               child: Container(
-                padding: 
-                     widget.prayerState == PrayerState.next
-                        ? EdgeInsets.symmetric(horizontal: 7.w, vertical: 3.h)
-                        : null
-                    ,
+                padding: widget.prayerState == PrayerState.next
+                    ? EdgeInsets.symmetric(horizontal: 7.w, vertical: 3.h)
+                    : null,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40.r),
-                    border: 
-                         widget.prayerState == PrayerState.next
-                            ? Border.all(color: AppColors.primary, width: 2)
-                            : null
-                        ),
+                    border: widget.prayerState == PrayerState.next
+                        ? Border.all(color: AppColors.primary, width: 2)
+                        : null),
                 child: Row(
                   children: [
                     Container(
-                      padding:
-                           widget.prayerState == PrayerState.previous
-                              ? EdgeInsets.symmetric(
-                                  vertical: 2.h, horizontal: 10.w)
-                              : null
-                          ,
-                      decoration: 
-                          widget.prayerState == PrayerState.previous
-                              ? BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40.r),
-                                  color: AppColors.primary.withOpacity(0.15))
-                              : null
-                          ,
+                      padding: widget.prayerState == PrayerState.previous
+                          ? EdgeInsets.symmetric(
+                              vertical: 2.h, horizontal: 10.w)
+                          : null,
+                      decoration: widget.prayerState == PrayerState.previous
+                          ? BoxDecoration(
+                              borderRadius: BorderRadius.circular(40.r),
+                              color: AppColors.primary.withOpacity(0.15))
+                          : null,
                       child: Text(tr(widget.prayer.prayerName!),
-                          style: AppStyles.style20.copyWith(
-                              color: 
-                                   widget.prayerState == PrayerState.next
-                                      ? AppColors.primary
-                                      : Colors.black
-                                  ,
-                              fontWeight: 
-                                   widget.prayerState == PrayerState.next ||
-                                          widget.prayerState ==
-                                              PrayerState.previous
-                                      ? FontWeight.w700
-                                      : FontWeight.w400
-                                  )),
+                          style: AppStyles.style18.copyWith(
+                              color: widget.prayerState == PrayerState.next
+                                  ? AppColors.primary
+                                  : Colors.black,
+                              fontWeight: widget.prayerState ==
+                                          PrayerState.next ||
+                                      widget.prayerState == PrayerState.previous
+                                  ? FontWeight.w700
+                                  : FontWeight.w400)),
                     ),
                     const Spacer(),
                     Text(widget.prayer.prayerDate!.split(' ').first,
-                        style: AppStyles.style18.copyWith(
-                            fontWeight: 
-                                 widget.prayerState == PrayerState.next ||
-                                        widget.prayerState ==
-                                            PrayerState.previous
-                                    ? FontWeight.bold
-                                    : FontWeight.w400
-                                ,
-                            color: 
-                                 widget.prayerState == PrayerState.next
-                                    ? AppColors.primary
-                                    : Colors.black
-                                )),
+                        style: AppStyles.style16.copyWith(
+                            fontWeight: widget.prayerState ==
+                                        PrayerState.next ||
+                                    widget.prayerState == PrayerState.previous
+                                ? FontWeight.bold
+                                : FontWeight.w400,
+                            color: widget.prayerState == PrayerState.next
+                                ? AppColors.primary
+                                : Colors.black)),
                   ],
                 ),
               ),
@@ -128,7 +111,11 @@ class _PrayerListViewItemState extends State<PrayerListViewItem>
             ] else ...[
               40.0.width
             ],
-            const Icon(Icons.mic),
+            Icon(
+              Icons.notifications_active,
+              color: Colors.grey.shade600,
+              size: 20.w,
+            ),
           ],
         ),
       ),

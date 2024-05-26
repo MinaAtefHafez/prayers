@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prayers/core/helpers/localization_helper/localization/localization_utils.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
 import 'package:prayers/features/prayers/data/models/calendar_month_model.dart';
@@ -34,7 +35,7 @@ class TodayItem extends StatelessWidget {
                             : prayerToday.gregorian!.day!;
                     return Text(
                       '${tr('${prayerToday.gregorian!.weekday!.en}')} , $day ${tr(prayerToday.gregorian!.month!.en!)} ${prayerToday.gregorian!.year}',
-                      style: AppStyles.style18.copyWith(
+                      style: AppStyles.style16.copyWith(
                           fontWeight: FontWeight.bold, color: Colors.black),
                     );
                   }),
@@ -49,7 +50,7 @@ class TodayItem extends StatelessWidget {
                     ? prayerToday.hijri!.month!.ar
                     : prayerToday.hijri!.month!.en;
                 return Text('$day $month ${prayerToday.hijri!.year}',
-                    style: AppStyles.style16.copyWith(
+                    style: AppStyles.style14.copyWith(
                         color: Colors.grey.shade600,
                         fontWeight: FontWeight.w400));
               })
@@ -59,7 +60,9 @@ class TodayItem extends StatelessWidget {
         const Spacer(),
         IconButton(
             onPressed: onTapIcon, icon:  Icon(Icons.calendar_month ,
-            color : Colors.grey.shade500 )),
+            color : Colors.grey.shade700 ,
+             size: 25.w ,
+             )),
       ],
     );
   }

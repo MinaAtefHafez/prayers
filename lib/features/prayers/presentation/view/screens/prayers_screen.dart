@@ -51,6 +51,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
           }
 
           if (state is GetCurrentLocationFailure) {
+            context.pop();
             showSnackBar(context, message: state.errMessage);
           }
         }, child: BlocBuilder<PrayersCubit, PrayersState>(

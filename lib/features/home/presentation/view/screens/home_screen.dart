@@ -42,12 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
     await prayersCubit.getPreviousPrayerForToday();
     await prayersCubit.getNextPrayerForToday();
 
-    timer30 = Timer.periodic(const Duration(minutes: 1), (timer) async {
+    timer30 = Timer.periodic(const Duration(seconds: 30), (timer) async {
       await prayersCubit.getPrayers();
       await prayersCubit.filterPrayersToday();
     });
 
-    timer2 = Timer.periodic(const Duration(seconds: 5), (timer) async {
+    timer2 = Timer.periodic(const Duration(seconds: 3), (timer) async {
       await prayersCubit.getPreviousPrayerForToday();
       await prayersCubit.getNextPrayerForToday();
     });

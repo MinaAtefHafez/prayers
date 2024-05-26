@@ -55,7 +55,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
           }
         }, child: BlocBuilder<PrayersCubit, PrayersState>(
           builder: (context, state) {
-            if (settingsCubit.location != null) {
+            if (prayersCubit.prayerToday != null) {
               return Stack(
                 children: [
                   Container(color: AppColors.primary),

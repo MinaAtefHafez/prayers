@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
 import 'package:prayers/features/home/presentation/home_cubit/home_cubit.dart';
 import 'package:prayers/features/prayers/presentation/prayers_cubit/prayers_cubit.dart';
@@ -67,12 +68,17 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, state) => Scaffold(
               body: homeCubit.screens[homeCubit.bottomNavIndex],
               bottomNavigationBar: BottomNavigationBar(
+                  iconSize: 20.w,
                   backgroundColor: Colors.white,
                   selectedItemColor: Colors.black,
                   unselectedItemColor: Colors.grey.shade500,
                   showUnselectedLabels: true,
-                  selectedIconTheme: const IconThemeData(
-                      color: Colors.black, applyTextScaling: true, size: 27),
+                  selectedIconTheme: IconThemeData(
+                      color: Colors.black, applyTextScaling: true, size: 22.w),
+                  unselectedIconTheme: IconThemeData(
+                      color: Colors.grey.shade400,
+                      size: 22.w,
+                      applyTextScaling: true),
                   selectedLabelStyle: AppStyles.style16.copyWith(
                       fontWeight: FontWeight.w500, color: Colors.black),
                   currentIndex: homeCubit.bottomNavIndex,

@@ -45,6 +45,7 @@ class _SettingsShowPrayersScreenState extends State<SettingsShowPrayersScreen> {
                 TextButton(
                     onPressed: () async {
                       await settingsCubit.savePrayersSettingsLocal();
+                      await settingsCubit.getPrayersSettingsLocal();
                       prayersCubit.filterPrayersToday().then((value) {
                         context.pop();
                       });

@@ -6,6 +6,7 @@ import 'package:prayers/core/dependency_injection/dependency_injection.dart';
 import 'package:prayers/core/extensions/distance_extention.dart';
 import 'package:prayers/core/extensions/navigator_extension.dart';
 import 'package:prayers/features/settings_details/presentation/settings_cubit/settings_cubit.dart';
+import 'package:prayers/features/settings_details/presentation/view/screens/methods_choosen_screen.dart';
 import 'package:prayers/features/settings_details/presentation/view/screens/settings_show_prayers_screen.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/settings_list_tile.dart';
 import 'package:prayers/features/settings_details/presentation/view/widgets/settings_ui_lists.dart';
@@ -55,36 +56,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   InkWell(
                       onTap: () {
                         changeLanguageDialog(context,
-                            
                             groupedValue: settingsCubit.languageRadioValue,
                             onChanged: settingsCubit.changeLanguageRadioValue);
                       },
                       child: SettingsListTile(
                           settingsItemModel: settingsItems[0])),
-                  15.0.height,
+                  10.0.height,
                   InkWell(
                       onTap: () {
                         context.pushNamed(SettingsShowPrayersScreen.name);
                       },
                       child: SettingsListTile(
                           settingsItemModel: settingsItems[1])),
-                  15.0.height,
-                  InkWell(
-                      onTap: () {},
-                      child: SettingsListTile(
-                          settingsItemModel: settingsItems[2])),
-                  15.0.height,
+                  10.0.height,
                   InkWell(
                       onTap: () {
-                        
+                        context.pushNamed(MethodChoosenScreen.name);
                       },
+                      child: SettingsListTile(
+                          settingsItemModel: settingsItems[2])),
+                  10.0.height,
+                  InkWell(
+                      onTap: () {},
                       child: SettingsListTile(
                           settingsItemModel: settingsItems[3])),
                   InkWell(
                       onTap: () {},
                       child: SettingsListTile(
                           settingsItemModel: settingsItems[4])),
-                  20.0.height,
+                  15.0.height,
                   Divider(
                     color: Colors.grey.shade300,
                     thickness: 15.h,

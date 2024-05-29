@@ -27,17 +27,21 @@ void main() async {
     }
   });
 
-  await AwesomeNotifications().createNotification(
+   Future.delayed(const Duration(seconds: 10) , () async {
+    await AwesomeNotifications().createNotification(
       content: NotificationContent(
-          id: 1,
-          channelKey: 'Prayer',
-          actionType: ActionType.Default,
-          autoDismissible: false,
-          backgroundColor: AppColors.primary,
-          duration: const Duration(seconds: 5),
-          title: 'Hello',
-          body: 'Hello, how are you?',
-          locked: false));
+    id: 1,
+    channelKey: 'Prayer',
+    actionType: ActionType.Default,
+    autoDismissible: false,
+    backgroundColor: AppColors.primary,
+    duration: const Duration(seconds: 5),
+    title: 'Hello',
+    category: NotificationCategory.Alarm,
+    wakeUpScreen: true,
+    body: 'Hello, how are you?',
+  ));
+   } );
 
   await EasyLocalization.ensureInitialized();
   await Future.wait([setUpLocator(), SharedPref.init(), HiveHelper.init()]);

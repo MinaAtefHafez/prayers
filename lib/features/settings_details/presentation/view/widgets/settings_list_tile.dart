@@ -14,7 +14,7 @@ class SettingsListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(tr(settingsItemModel.title),
-          style: AppStyles.style20
+          style: AppStyles.style18
               .copyWith(color: Colors.black, fontWeight: FontWeight.w500)),
       subtitle: Text(
         tr(settingsItemModel.subTitle),

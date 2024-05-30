@@ -15,6 +15,12 @@ void main() async {
   await AwesomeNotifications().initialize(null, [
     NotificationChannel(
         channelKey: 'Prayer',
+        playSound: true,
+        importance: NotificationImportance.High ,
+        enableVibration: true,
+        criticalAlerts: true,
+        defaultPrivacy: NotificationPrivacy.Public,
+        vibrationPattern: lowVibrationPattern,
         channelName: 'Prayers Channel',
         channelDescription: 'PrayersApp channel',
         defaultColor: const Color(0xFF9D50DD),
@@ -27,21 +33,20 @@ void main() async {
     }
   });
 
-   Future.delayed(const Duration(seconds: 10) , () async {
+  Future.delayed(const Duration(seconds: 10), () async {
     await AwesomeNotifications().createNotification(
-      content: NotificationContent(
-    id: 1,
-    channelKey: 'Prayer',
-    actionType: ActionType.Default,
-    autoDismissible: false,
-    backgroundColor: AppColors.primary,
-    duration: const Duration(seconds: 5),
-    title: 'Hello',
-    category: NotificationCategory.Alarm,
-    wakeUpScreen: true,
-    body: 'Hello, how are you?',
-  ));
-   } );
+        content: NotificationContent(
+      id: 1,
+      channelKey: 'Prayer',
+      actionType: ActionType.Default,
+      autoDismissible: false,
+      backgroundColor: AppColors.primary,
+      title: 'Hello',
+      category: NotificationCategory.Alarm,
+      wakeUpScreen: true,
+      body: 'Hello, how are you?',
+    ));
+  });
 
   await EasyLocalization.ensureInitialized();
   await Future.wait([setUpLocator(), SharedPref.init(), HiveHelper.init()]);

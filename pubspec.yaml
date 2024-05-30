@@ -76,6 +76,7 @@ flutter:
     # - assets/images
     - assets/localization/
     - assets/images/
+    - assets/audios/
 
 flutter_assets:
   assets_path: assets/images/

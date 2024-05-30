@@ -14,7 +14,7 @@
         android:icon="@mipmap/ic_launcher">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDjjZzMmPfqAB8xbfhXhr2yiEaJ8n5EiDg" />
+            android:value="AIzaSyDjjZzMmPfqAB8xbfhXhr2yiEaJ8n5EiDg"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -25,15 +25,12 @@
             android:windowSoftInputMode="adjustResize"
             android:showWhenLocked="true"
             android:turnScreenOn="true">
-
-
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme"
                 
             />
             <intent-filter>
-                <action android:name="android.FLUTTER_NOTIFICATION_CLICK" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />

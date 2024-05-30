@@ -6,12 +6,11 @@ abstract class LocalNotifHelper {
 
   static Future<void> init() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('app_icon');
 
     const DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
       requestBadgePermission: true,
-      
       requestSoundPermission: true,
       requestAlertPermission: true,
     );
@@ -22,15 +21,16 @@ abstract class LocalNotifHelper {
             iOS: initializationSettingsDarwin));
   }
 
- static Future<void> showSoundNotification() async {
+  static Future<void> showSoundNotification() async {
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails('PrayersId', 'Prayers',
             importance: Importance.max,
             priority: Priority.high,
             category: AndroidNotificationCategory.alarm,
-            fullScreenIntent: true,
             enableVibration: true,
+            fullScreenIntent: true,
             playSound: true,
+            channelShowBadge: true,
             autoCancel: false,
             visibility: NotificationVisibility.public,
             sound: RawResourceAndroidNotificationSound('takber'));
@@ -46,7 +46,10 @@ abstract class LocalNotifHelper {
     const NotificationDetails notificationDetails =
         NotificationDetails(android: androidDetails, iOS: darwinDetails);
     await _flutterLocalNotificationsPlugin.show(
-        0, 'Prayers', 'sdfsdfsdfsdfsd', notificationDetails , 
-        );
+      0,
+      'Prayers',
+      'sdfsdfsdfsdfsd',
+      notificationDetails,
+    );
   }
 }

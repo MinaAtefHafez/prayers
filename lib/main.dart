@@ -24,9 +24,6 @@ void main() async {
 
   await LocalNotifHelper.showSoundNotification();
 
-  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-  log(androidInfo.version.sdkInt.toString());
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

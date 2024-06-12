@@ -16,8 +16,6 @@ final di = GetIt.instance;
 Future<void> setUpLocator() async {
   //! other
 
-  di.registerLazySingleton<Datum>(() => Datum());
-
   di.registerLazySingleton(() => Dio());
   di.registerLazySingleton<ApiConsumer>(() => DioConsumer(di()));
 

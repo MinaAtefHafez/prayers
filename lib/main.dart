@@ -22,7 +22,8 @@ void main() async {
     LocalNotifHelper.init()
   ]);
 
-  await LocalNotifHelper.showSoundNotification();
+  await LocalNotifHelper.showSoundNotification();  
+  
 
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

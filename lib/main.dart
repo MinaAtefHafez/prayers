@@ -7,6 +7,8 @@ import 'package:prayers/core/helpers/hive_helper/hive_helper.dart';
 import 'package:prayers/core/helpers/local_notif_helper/local_notif_helper.dart';
 import 'package:prayers/core/helpers/shared_preference/shared_preference.dart';
 
+import 'core/helpers/background_service/background_service.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +19,8 @@ void main() async {
     HiveHelper.init(),
     LocalNotifHelper.init()
   ]);
+
+  await BackgroundService.initializeService();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

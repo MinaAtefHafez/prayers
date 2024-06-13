@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
@@ -74,10 +73,10 @@ abstract class BackgroundService {
       final prayerTime = IntlHelper.dateTime(prayer.prayerDate);
       final difference = prayerTime.difference(timeNow).inMinutes;
       if (!settings[prayer.prayerName]!.isNotify) continue;
-      if (difference != settings[prayer.prayerName]!.minutes) continue;
+      if (difference != 3) continue;
       await LocalNotifHelper.init();
       await LocalNotifHelper.showSoundNotification(
-          title: tr(prayer.prayerName!),
+          title: prayer.prayerName!,
           subTitle: prayer.prayerDate!.split(' ').first);
     }
   }

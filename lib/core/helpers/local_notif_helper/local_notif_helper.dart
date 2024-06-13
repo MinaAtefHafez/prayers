@@ -21,12 +21,15 @@ abstract class LocalNotifHelper {
             iOS: initializationSettingsDarwin));
   }
 
-  static Future<void> showSoundNotification() async {
+  static Future<void> showSoundNotification({
+    required String title,
+    required String subTitle,
+  }) async {
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails('PrayersId', 'Prayers',
             importance: Importance.max,
             priority: Priority.high,
-            category: AndroidNotificationCategory.alarm,
+            category: AndroidNotificationCategory.reminder,
             enableVibration: true,
             fullScreenIntent: true,
             playSound: true,
@@ -47,8 +50,8 @@ abstract class LocalNotifHelper {
         NotificationDetails(android: androidDetails, iOS: darwinDetails);
     await _flutterLocalNotificationsPlugin.show(
       0,
-      'Prayers',
-      'sdfsdfsdfsdfsd',
+      title,
+      subTitle,
       notificationDetails,
     );
   }

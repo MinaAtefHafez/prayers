@@ -28,6 +28,8 @@ class PrayersCubit extends Cubit<PrayersState> {
 
   //! Calendar
 
+  Datum? get getPrayerToday => prayerToday;
+
   Future<void> getCalendarMonth() async {
     emit(GetCalendarMonthLoading());
     final calendarMonthParam = CalendarMonthModelParma(

@@ -24,6 +24,7 @@ abstract class BackgroundService {
         isForegroundMode: true,
       ),
       iosConfiguration: IosConfiguration(
+        autoStart: true ,
         onForeground: onStart,
         onBackground: onIosBackground,
       ),
@@ -48,20 +49,20 @@ abstract class BackgroundService {
     await HiveHelper.init();
     await SharedPref.init();
     Timer.periodic(const Duration(seconds: 37), (_) async {
-      await sendPrayerNotification();
+      await backgroundService();
     });
   }
 
   static Future<bool> onIosBackground(ServiceInstance service) {
     WidgetsFlutterBinding.ensureInitialized();
     DartPluginRegistrant.ensureInitialized();
-
     return Future.value(true);
   }
 
-  static Future<void> sendPrayerNotification() async {
+  static Future<void> backgroundService() async {
     final prayerCubit = di<PrayersCubit>();
     final settingsCubit = di<SettingsCubit>();
+    await settingsCubit.savePrayersSettingsLocal();
     await settingsCubit.getPrayersSettingsLocal();
     await prayerCubit.getYearNowLocal();
     await prayerCubit.callCalendarApiOrLocal();

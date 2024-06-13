@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:prayers/core/helpers/background_service/background_service.dart';
 import 'package:prayers/core/theme/app_styles/app_styles.dart';
 import 'package:prayers/features/home/presentation/home_cubit/home_cubit.dart';
 import 'package:prayers/features/prayers/presentation/prayers_cubit/prayers_cubit.dart';
@@ -37,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       prayersCubit.getYearNowLocal()
     ]);
     await prayersCubit.callCalendarApiOrLocal();
+    await settingsCubit.savePrayersSettingsLocal();
     await settingsCubit.getPrayersSettingsLocal();
     await prayersCubit.getPrayers();
     await prayersCubit.filterPrayersToday();
@@ -52,6 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
       await prayersCubit.getPreviousPrayerForToday();
       await prayersCubit.getNextPrayerForToday();
     });
+    
+    await BackgroundService.initializeService(); 
   }
 
   @override

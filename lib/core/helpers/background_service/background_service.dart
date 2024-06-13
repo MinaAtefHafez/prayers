@@ -47,7 +47,7 @@ abstract class BackgroundService {
     await setUpLocator();
     await HiveHelper.init();
     await SharedPref.init();
-    Timer.periodic(const Duration(seconds: 45), (_) async {
+    Timer.periodic(const Duration(seconds: 37), (_) async {
       await sendPrayerNotification();
     });
   }

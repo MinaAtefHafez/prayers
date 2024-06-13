@@ -72,13 +72,12 @@ abstract class BackgroundService {
       final timeNow = IntlHelper.dateTime();
       final prayerTime = IntlHelper.dateTime(prayer.prayerDate);
       final difference = prayerTime.difference(timeNow).inMinutes;
-      if (settings[prayer.prayerName]!.isNotify &&
-          difference == settings[prayer.prayerName]!.minutes) {
-        await LocalNotifHelper.init();
-        await LocalNotifHelper.showSoundNotification(
-            title: tr(prayer.prayerName!),
-            subTitle: prayer.prayerDate!.split(' ').first);
-      }
+      if (!settings[prayer.prayerName]!.isNotify) continue;
+      if (difference != settings[prayer.prayerName]!.minutes) continue;
+      await LocalNotifHelper.init();
+      await LocalNotifHelper.showSoundNotification(
+          title: tr(prayer.prayerName!),
+          subTitle: prayer.prayerDate!.split(' ').first);
     }
   }
 }
